@@ -105,9 +105,17 @@ import { ABOUT } from "../config/site";
                                     <p class="timeline-company">
                                         {item.company}
                                     </p>
-                                    <p class="timeline-description">
-                                        {item.description}
-                                    </p>
+                                    <ul class="timeline-description-list">
+                                    {
+                                        Array.isArray(item.description) ? (
+                                            item.description.map((desc) => (
+                                                <li>{desc}</li>
+                                            ))
+                                        ) : (
+                                            <li>{item.description}</li>
+                                        )
+                                    }
+                                </ul>
                                 </div>
                             </div>
                         ))
@@ -171,7 +179,7 @@ import { ABOUT } from "../config/site";
     }
 
     .page-title {
-        font-size: clamp(3rem, 8vw, 6rem);
+        font-size: clamp(2rem, 4vw, 3.5rem);
         font-weight: 400;
         line-height: 1.1;
         margin-bottom: 2rem;
@@ -180,7 +188,8 @@ import { ABOUT } from "../config/site";
     }
 
     .title-line {
-        display: block;
+        display: inline-block;
+        white-space : nowrap;
         overflow: hidden;
         padding: 0.2rem 0;
     }
@@ -394,10 +403,19 @@ import { ABOUT } from "../config/site";
         font-size: 1rem;
     }
 
-    .timeline-description {
+  .timeline-description-list {
+        list-style-type: disc;
+        padding-left: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .timeline-description-list li {
         color: #a1a1aa;
         line-height: 1.7;
         font-weight: 300;
+        font-size: 0.95rem;
     }
 
     /* CTA Section */

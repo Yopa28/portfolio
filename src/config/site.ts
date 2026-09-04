@@ -236,8 +236,8 @@ export const CONTACT = {
 // About Page
 export const ABOUT = {
   pageLabel: "About",
-  pageTitle: ["Fullstack", "Engineer"],
-  intro: `Hi, I'm ${SITE.name}, a Fullstack Engineer who has shipped 2 production platforms end-to-end—from database schema design to deployed UI. Graduated with a Bachelor's degree in Informatics Engineering from Telkom University (GPA: 3.75/4.00), specializing in securing REST APIs and engineering offline-first mobile applications.`,
+  pageTitle: ["Fullstack Engineer | AI Engineer"],
+  intro: `Hi, I'm ${SITE.name}, a Fullstack & AI Engineer who has shipped 2 production platforms end-to-end from database schema design to deployed UI and AI integrations. Graduated with a Bachelor's degree in Informatics Engineering from Telkom University (GPA: 3.75/4.00), specializing in securing REST APIs, integrating AI models (Claude/LLM APIs), and engineering offline-first mobile applications.`,
   paragraphs: [
     "Over my journey, I have designed and deployed full-stack systems using Laravel, Express.js, Vue.js, and Flutter. I focus heavily on security (JWT, RBAC, bcrypt), payment gateway integration (Midtrans), and smooth user experience.",
     "From building cafe management systems to delivering Point of Sale solutions for local government initiatives (Dinas Komunikasi dan Informatika), I bridge complex backend logic with responsive frontend implementations.",
@@ -301,23 +301,35 @@ export const ABOUT = {
       {
         date: "Sept 2025 - Jan 2026",
         title: "Fullstack Developer (Freelance)",
-        company: "Kedai Sepijak",
-        description:
-          "Shipped a full-stack cafe management platform featuring digital menus, live analytics, and automated PDF report generation using Vue.js 3, Express.js, and MySQL. Secured 38 REST API endpoints with JWT + bcrypt.",
+        company: "Kedai Sepijak, Purwokerto",
+        description: [
+          "Shipped a full-stack cafe management platform — digital menus, live customer polling, feedback capture, and an admin analytics dashboard — using Vue.js 3, Express.js, and MySQL.",
+          "Built 38 REST API endpoints across 6 modules; introduced JWT auth + bcrypt hashing, closing a previously nonexistent access-control gap.",
+          "Built responsive interfaces with Vue.js 3 Composition API and Tailwind CSS, integrating Chart.js for real-time sales analytics.",
+          "Automated report generation with jsPDF (one-click PDF export), replacing manual spreadsheet reporting.",
+          "Drove full-lifecycle execution — covering regression testing, API integration, documentation, and deployment — in a cross-functional team to enable the client's successful launch."
+        ], // <--- .join(" ") sudah dihapus
       },
       {
         date: "Jul 2025 - Aug 2025",
         title: "Fullstack Developer (Intern)",
         company: "Dinas Komunikasi dan Informatika, Dairi",
-        description:
-          "Built a Point of Sale system with a Laravel admin dashboard and Flutter mobile app. Secured 16 REST APIs with Sanctum/RBAC, built offline-first mobile architecture (BLOC), and integrated Midtrans QRIS payments.",
+        description: [
+          "Built a Point of Sale system — Laravel admin dashboard plus Flutter mobile app — for retail vendors managing daily transactions.",
+          "Developed and secured 16 REST API endpoints with Laravel Sanctum and RBAC, enforcing least-privilege access across admin, cashier, and vendor roles on a schema I designed.",
+          "Built offline-first mobile client (Flutter BLoC, 13+ states) with local caching, so vendor orders sync reliably after connectivity drops.",
+          "Integrated Midtrans API for QRIS payments and built cashier-facing dashboards for daily revenue tracking and automated end-of-day closing, removing a manual reconciliation step.",
+          "Designed the UI/UX for the Dairi Regency Environmental Service application, simplifying report submission so citizens could file complaints with fewer steps."
+        ], // <--- .join(" ") sudah dihapus
       },
       {
         date: "Jan 2025 - Dec 2025",
         title: "Coordinator of E-Football Division",
         company: "Telkom University Esports",
-        description:
-          "Coordinated tournament activities, member registration, and operational planning while collaborating across organizational divisions.",
+        description: [
+          "Coordinated division activities, including training schedules, tournament participation, and event preparation for members.",
+          "Managed team communication, member registration, and operational planning while collaborating with other organizational divisions."
+        ], // <--- .join(" ") sudah dihapus
       },
     ],
   },
