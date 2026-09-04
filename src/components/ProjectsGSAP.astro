@@ -1,0 +1,419 @@
+---
+import { PROJECTS } from "../config/site";
+---
+
+<section id="projects" class="projects-gsap">
+    <div class="container">
+        <div class="section-header">
+            <div class="header-content">
+                <span class="section-label">{PROJECTS.sectionLabel}</span>
+                <h2 class="section-title">
+                    {
+                        PROJECTS.sectionTitle.map((word) => (
+                            <span class="title-word">{word}</span>
+                        ))
+                    }
+                </h2>
+                <p class="section-description">
+                    {PROJECTS.sectionDescription}
+                </p>
+            </div>
+        </div>
+
+        <div class="projects-grid">
+            {
+                PROJECTS.items.map((project, index) => (
+                    <article class="project-card" data-index={index}>
+                        <a
+                            href={`/projects/${project.slug}`}
+                            class="project-link"
+                        >
+                            <div class="project-image-wrapper">
+                                <div class="project-image">
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        loading="lazy"
+                                    />
+                                    <div class="project-overlay">
+                                        <span class="view-project">
+                                            View Details
+                                            <svg
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 20 20"
+                                                fill="none"
+                                            >
+                                                <path
+                                                    d="M4 10H16M16 10L10 4M16 10L10 16"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="project-info">
+                                <div class="project-header">
+                                    <span class="project-number">
+                                        0{index + 1}
+                                    </span>
+                                    <span class="project-category">
+                                        {project.category}
+                                    </span>
+                                </div>
+
+                                <h3 class="project-title">{project.title}</h3>
+                                <p class="project-description">
+                                    {project.description}
+                                </p>
+
+                                <div class="project-tags">
+                                    {project.tags.map((tag) => (
+                                        <span class="tag">{tag}</span>
+                                    ))}
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .projects-gsap {
+        padding: 8rem 0;
+        background: var(--bg-primary);
+        position: relative;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Section Header */
+    .section-header {
+        margin-bottom: 5rem;
+        text-align: center;
+    }
+
+    .header-content {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .section-label {
+        display: inline-block;
+        color: #71717a;
+        font-size: 0.875rem;
+        font-weight: 400;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 300;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.01em;
+        color: #ffffff;
+    }
+
+    .title-word {
+        display: inline-block;
+        margin-right: 0.5rem;
+    }
+
+    .section-description {
+        font-size: 1rem;
+        color: #a1a1aa;
+        line-height: 1.8;
+        max-width: 500px;
+        margin: 0 auto;
+        font-weight: 300;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 2rem;
+    }
+
+    .project-card {
+        position: relative;
+        opacity: 0;
+        will-change: transform, opacity;
+    }
+
+    .project-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        background: transparent;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.4s ease;
+    }
+
+    .project-link:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-4px);
+    }
+
+    /* Project Image */
+    .project-image-wrapper {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 16/10;
+    }
+
+    .project-image {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .project-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .project-link:hover .project-image img {
+        transform: scale(1.1);
+    }
+
+    .project-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .project-link:hover .project-overlay {
+        opacity: 1;
+    }
+
+    .view-project {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: white;
+        font-weight: 400;
+        font-size: 0.875rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transform: translateY(10px);
+        transition: transform 0.3s ease;
+    }
+
+    .project-link:hover .view-project {
+        transform: translateY(0);
+    }
+
+    /* Project Info */
+    .project-info {
+        padding: 2rem;
+    }
+
+    .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .project-number {
+        font-size: 1.5rem;
+        font-weight: 300;
+        color: #71717a;
+        line-height: 1;
+    }
+
+    .project-category {
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: #71717a;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    .project-title {
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        color: #ffffff;
+    }
+
+    .project-description {
+        color: #a1a1aa;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+        font-weight: 300;
+    }
+
+    .project-tags {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .tag {
+        padding: 0.35rem 0.75rem;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.75rem;
+        color: #71717a;
+        font-weight: 400;
+        letter-spacing: 0.05em;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .projects-grid {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .projects-gsap {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .projects-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+        }
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate section header
+    gsap.from(".section-label", {
+        scrollTrigger: {
+            trigger: ".section-header",
+            start: "top 80%",
+            once: true,
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+    });
+
+    gsap.from(".title-word", {
+        scrollTrigger: {
+            trigger: ".section-header",
+            start: "top 80%",
+            once: true,
+        },
+        y: 80,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 1,
+        ease: "power4.out",
+    });
+
+    gsap.from(".section-description", {
+        scrollTrigger: {
+            trigger: ".section-header",
+            start: "top 80%",
+            once: true,
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.4,
+        ease: "power3.out",
+    });
+
+    // Animate project cards with stagger
+    const projectCards = gsap.utils.toArray(".project-card");
+
+    projectCards.forEach((card: any, index) => {
+        gsap.to(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: "top 85%",
+                once: true,
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+            delay: (index % 2) * 0.2,
+        });
+
+        // Parallax effect on project cards
+        gsap.to(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
+            },
+            y: -50,
+            ease: "none",
+        });
+    });
+
+    // Hover animation for project images
+    const projectLinks = document.querySelectorAll(".project-link");
+
+    projectLinks.forEach((link) => {
+        const image = link.querySelector(".project-image img");
+
+        link.addEventListener("mouseenter", () => {
+            gsap.to(image, {
+                scale: 1.1,
+                duration: 0.8,
+                ease: "power2.out",
+            });
+        });
+
+        link.addEventListener("mouseleave", () => {
+            gsap.to(image, {
+                scale: 1,
+                duration: 0.8,
+                ease: "power2.out",
+            });
+        });
+    });
+</script>

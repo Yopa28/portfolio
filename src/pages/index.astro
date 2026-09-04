@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeroGSAP from "../components/HeroGSAP.astro";
+import StatsGSAP from "../components/StatsGSAP.astro";
+import ProjectsGSAP from "../components/ProjectsGSAP.astro";
+import ContactGSAP from "../components/ContactGSAP.astro";
+import { CONTACT } from "../config/site";
+---
+
+<Layout title="Portfolio - Creative Developer">
+    <main class="gsap-page">
+        <HeroGSAP />
+
+        <StatsGSAP />
+
+        <ProjectsGSAP />
+
+        <ContactGSAP />
+    </main>
+</Layout>
+
+<style>
+    :root {
+        --bg-primary: var(--color-bg-primary, #0a0a0f);
+        --bg-secondary: var(--color-bg-secondary, #0f172a);
+        --text-primary: var(--color-text-primary, #ffffff);
+        --text-secondary: var(--color-text-secondary, #a1a1aa);
+        --accent-primary: var(--color-accent-primary, #2563eb);   /* Blue */
+        --accent-secondary: var(--color-accent-secondary, #06b6d4); /* Cyan */
+        --accent-tertiary: var(--color-accent-tertiary, #38bdf8);  /* Sky Blue */
+        --border-color: var(--color-border-primary, rgba(255, 255, 255, 0.08));
+    }
+
+    .gsap-page {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        min-height: 100vh;
+        width: 100%;
+        overflow-x: hidden;
+        position: relative;
+    }
+</style>

@@ -1,0 +1,548 @@
+---
+import { HERO, SITE } from "../config/site";
+
+const { subtitle, title, description, cta } = HERO;
+const titleWords = title.split(" ");
+---
+
+<section class="hero-gsap">
+    <div class="container">
+        <div class="hero-grid">
+            <!-- Kolom Teks / Kiri -->
+            <div class="hero-content">
+                <div class="hero-label">
+                    <span class="label-text">
+                        {
+                            subtitle
+                                .split(" ")
+                                .map((word) => (
+                                    <span class="label-word">{word}</span>
+                                ))
+                        }
+                    </span>
+                </div>
+
+                <h1 class="hero-title">
+                    {
+                        titleWords.map((word) => (
+                            <span class="title-line">
+                                <span class="word">{word}</span>
+                            </span>
+                        ))
+                    }
+                </h1>
+
+                <p class="hero-description">{description}</p>
+
+                <div class="hero-cta">
+                    <button
+                        onclick={`scrollToSection('${cta.primary.targetId}')`}
+                        class="btn btn-primary magnetic"
+                    >
+                        <span class="btn-text">{cta.primary.text}</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                    <button
+                        onclick={`scrollToSection('${cta.secondary.targetId}')`}
+                        class="btn btn-magnetic-underline magnetic magnetic-special"
+                    >
+                        <span class="btn-text">{cta.secondary.text}</span>
+                        <span class="magnetic-underline"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kolom Foto Profil / Kanan -->
+            <div class="hero-image-wrapper">
+                <div class="profile-glow"></div>
+                <div class="profile-card">
+                    <div class="profile-card-inner">
+                        <img src="/projects/profile.jpg" alt={SITE.name} class="profile-img" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Minimal decorations -->
+    <div class="hero-line line-left"></div>
+    <div class="hero-line line-right"></div>
+</section>
+
+<style>
+    .hero-gsap {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background: var(--bg-primary);
+        overflow: hidden;
+    }
+
+    .container {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Grid Layout 2 Kolom */
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 3rem;
+        align-items: center;
+        padding-top: 60px;
+    }
+
+    .hero-content {
+        max-width: 800px;
+    }
+
+    .hero-label {
+        margin-bottom: 2rem;
+        overflow: hidden;
+    }
+
+    .label-text {
+        display: inline-flex;
+        gap: 0.5rem;
+        color: #38bdf8;
+        font-size: 0.875rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+    }
+
+    .label-word {
+        display: inline-block;
+        transform-origin: center;
+    }
+
+    .hero-title {
+        font-size: clamp(2.8rem, 6vw, 5.5rem);
+        font-weight: 300;
+        line-height: 1.1;
+        margin-bottom: 2rem;
+        letter-spacing: -0.02em;
+    }
+
+    .title-line {
+        display: block;
+        overflow: hidden;
+        padding: 0.2rem 0;
+    }
+
+    .word {
+        display: inline-block;
+        will-change: transform;
+        color: #ffffff;
+    }
+
+    .hero-description {
+        font-size: clamp(1rem, 1.8vw, 1.15rem);
+        color: #a1a1aa;
+        line-height: 1.8;
+        margin-bottom: 2.5rem;
+        max-width: 580px;
+        font-weight: 300;
+    }
+
+    .hero-cta {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+        align-items: center;
+    }
+
+    .btn {
+        position: relative;
+        padding: 1rem 2rem;
+        font-weight: 500;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+        will-change: transform;
+        letter-spacing: 0.02em;
+        border-radius: 50px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #2563eb, #06b6d4);
+        color: #ffffff;
+        border: none;
+        box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+        transform: translateX(4px);
+        box-shadow: 0 6px 25px rgba(6, 182, 212, 0.4);
+    }
+
+    .btn-magnetic-underline {
+        position: relative;
+        padding: 0.75rem 1rem !important;
+        font-weight: 400;
+        font-size: 1rem;
+        color: #ffffff;
+        text-decoration: none;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        will-change: transform;
+        letter-spacing: 0.02em;
+        transition:
+            background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+            color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+            border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+            padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 0;
+        background: transparent;
+        border: 1px solid transparent;
+        transform: translate(0, 0);
+    }
+
+    .magnetic-underline {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #06b6d4;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-magnetic-underline.is-near {
+        padding: 1rem 2rem !important;
+        border-radius: 50px;
+        background: #06b6d4;
+        color: #0a0a0f;
+        border-color: #06b6d4;
+    }
+
+    .btn-magnetic-underline.is-near .magnetic-underline {
+        opacity: 0;
+    }
+
+    .btn-text {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+    }
+
+    .btn-arrow {
+        transition: transform 0.3s ease;
+    }
+
+    .btn-primary:hover .btn-arrow {
+        transform: translateX(4px);
+    }
+
+    /* Foto Profil & Glowing Glass Effect */
+    .hero-image-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px; /* Diperlukan untuk efek miring 3D */
+    }
+
+    .profile-glow {
+        position: absolute;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(37, 99, 235, 0.45) 0%, rgba(6, 182, 212, 0.25) 50%, transparent 70%);
+        filter: blur(45px);
+        border-radius: 50%;
+        z-index: 0;
+        will-change: transform, opacity;
+    }
+
+    .profile-card {
+        position: relative;
+        z-index: 1;
+        width: 320px;
+        height: 390px;
+        border-radius: 24px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(56, 189, 248, 0.1);
+        transform-style: preserve-3d;
+        will-change: transform;
+        cursor: pointer;
+    }
+
+    .profile-card-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .profile-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+        transition: transform 0.5s ease;
+    }
+
+    .profile-card:hover .profile-img {
+        transform: scale(1.05);
+    }
+
+    /* Minimal decorative lines */
+    .hero-line {
+        position: absolute;
+        width: 1px;
+        height: 100vh;
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(59, 130, 246, 0.15),
+            transparent
+        );
+        top: 0;
+    }
+
+    .line-left { left: 5%; }
+    .line-right { right: 5%; }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+        .hero-grid {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 3rem;
+            padding-top: 100px;
+        }
+
+        .hero-content { margin: 0 auto; }
+        .hero-description { margin: 0 auto 2.5rem; }
+        .hero-cta { justify-content: center; }
+
+        .profile-card {
+            width: 270px;
+            height: 330px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero-title { font-size: 2.5rem; }
+        .hero-cta {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 1.5rem;
+        }
+        .btn { justify-content: center; }
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance animations
+    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+    gsap.set(".hero-cta .btn", { opacity: 0, y: 20 });
+    gsap.set(".profile-card", { opacity: 0, scale: 0.8, y: 30 });
+
+    const labelWords = gsap.utils.toArray(".label-word") as HTMLElement[];
+    if (labelWords.length > 0) {
+        gsap.set(labelWords[0] as HTMLElement, { opacity: 0, scale: 0, rotation: 180 });
+    }
+    if (labelWords.length > 1) {
+        gsap.set(labelWords[1] as HTMLElement, { opacity: 0, y: -50, rotationX: 90 });
+    }
+
+    if (labelWords.length > 0) {
+        tl.to(labelWords[0] as HTMLElement, {
+            opacity: 1,
+            scale: 1,
+            rotation: 0,
+            duration: 1,
+            ease: "elastic.out(1.2, 0.5)",
+            delay: 0.2,
+        });
+    }
+
+    if (labelWords.length > 1) {
+        tl.to(
+            labelWords[1] as HTMLElement,
+            {
+                opacity: 1,
+                y: 0,
+                rotationX: 0,
+                duration: 0.8,
+                ease: "back.out(2)",
+            },
+            "-=0.5",
+        );
+    }
+
+    tl.from(
+        ".title-line .word",
+        {
+            y: 60,
+            opacity: 0,
+            stagger: 0.15,
+            duration: 1,
+            ease: "power3.out",
+        },
+        "-=0.5",
+    )
+        .from(
+            ".hero-description",
+            {
+                y: 30,
+                opacity: 0,
+                scale: 0.95,
+                duration: 1,
+                ease: "power2.out",
+            },
+            "-=0.8",
+        )
+        .to(
+            ".hero-cta .btn",
+            {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                stagger: 0.15,
+                duration: 0.8,
+                ease: "back.out(1.5)",
+            },
+            "-=0.5",
+        )
+        .to(
+            ".profile-card",
+            {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out",
+                onComplete: initProfileAnimations, // Jalankan animasi berulang setelah entrance selesai
+            },
+            "-=0.8",
+        );
+
+    // ==========================================
+    // 💥 ANIMASI INTERAKTIF KARTU FOTO PROFIL
+    // ==========================================
+    function initProfileAnimations() {
+        const card = document.querySelector(".profile-card");
+        const glow = document.querySelector(".profile-glow");
+
+        if (!card || !glow) return;
+
+        // 1. Continuous Floating Animation (Melayang halus)
+        gsap.to(card, {
+            y: "-=12",
+            duration: 2.5,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true,
+        });
+
+        // 2. Continuous Pulsating Glow (Pendaran cahaya berdenyut)
+        gsap.to(glow, {
+            scale: 1.15,
+            opacity: 0.8,
+            duration: 2,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true,
+        });
+
+        // 3. 3D Tilt Effect saat Mouse Digerakkan di Atas Kartu
+        card.addEventListener("mousemove", (e: any) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            const rotateX = (-y / rect.height) * 20; // Miring sumbu X
+            const rotateY = (x / rect.width) * 20;  // Miring sumbu Y
+
+            gsap.to(card, {
+                rotateX: rotateX,
+                rotateY: rotateY,
+                duration: 0.3,
+                ease: "power2.out",
+            });
+        });
+
+        // Kembalikan ke posisi semula saat mouse meninggalkan kartu
+        card.addEventListener("mouseleave", () => {
+            gsap.to(card, {
+                rotateX: 0,
+                rotateY: 0,
+                duration: 0.6,
+                ease: "power2.out",
+            });
+        });
+    }
+
+    // Magnetic buttons handler...
+    const buttons = document.querySelectorAll(".magnetic");
+    const magneticRadius = 100;
+
+    document.addEventListener("mousemove", (e) => {
+        const mouseEvent = e as MouseEvent;
+
+        buttons.forEach((button) => {
+            const rect = button.getBoundingClientRect();
+            const buttonCenterX = rect.left + rect.width / 2;
+            const buttonCenterY = rect.top + rect.height / 2;
+
+            const deltaX = mouseEvent.clientX - buttonCenterX;
+            const deltaY = mouseEvent.clientY - buttonCenterY;
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+            if (distance < magneticRadius) {
+                const strength = 1 - distance / magneticRadius;
+                const pullX = deltaX * strength * 0.4;
+                const pullY = deltaY * strength * 0.4;
+
+                gsap.to(button, {
+                    x: pullX,
+                    y: pullY,
+                    duration: 0.3,
+                    ease: "power2.out",
+                });
+
+                if (button.classList.contains("magnetic-special")) {
+                    if (distance < 80) {
+                        button.classList.add("is-near");
+                    } else {
+                        button.classList.remove("is-near");
+                    }
+                }
+            } else {
+                gsap.to(button, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: "power2.out",
+                });
+
+                if (button.classList.contains("magnetic-special")) {
+                    button.classList.remove("is-near");
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,435 @@
+---
+import { SITE } from "../config/site";
+
+const { author: name, role } = SITE;
+---
+
+<div class="preloader">
+    <div class="preloader-content">
+        <!-- Name -->
+        <div class="preloader-text">
+            <h1 class="preloader-name">
+                {
+                    name.split(" ").map((word) => (
+                        <span class="word">
+                            {word.split("").map((char) => (
+                                <span class="char">{char}</span>
+                            ))}
+                        </span>
+                    ))
+                }
+            </h1>
+
+            <div class="divider"></div>
+
+            <p class="preloader-role">{role}</p>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <span class="progress-number">0</span>
+        </div>
+    </div>
+
+    <!-- Minimal Decoration -->
+    <div class="preloader-corner corner-tl"></div>
+    <div class="preloader-corner corner-tr"></div>
+    <div class="preloader-corner corner-bl"></div>
+    <div class="preloader-corner corner-br"></div>
+</div>
+
+<style>
+    .preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #0a0a0f;
+        overflow: hidden;
+    }
+
+    .preloader-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3.5rem;
+        padding: 2rem;
+        max-width: 95%;
+    }
+
+    /* Text */
+    .preloader-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .preloader-name {
+        font-size: clamp(1.25rem, 3.5vw, 2.75rem); /* Ukuran disesuaikan agar nama panjang muat dalam 1 baris di desktop */
+        font-weight: 300;
+        letter-spacing: 0.12em;
+        text-align: center;
+        line-height: 1.2;
+        margin: 0;
+        color: #ffffff;
+        display: flex;
+        flex-wrap: wrap; /* Fleksibel saat di layar HP */
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .word {
+        display: flex;
+        justify-content: center;
+        white-space: nowrap; /* Menjaga setiap kata tidak terputus */
+    }
+
+    .char {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    /* Divider Cyan/Blue */
+    .divider {
+        width: 80px;
+        height: 2px;
+        background: linear-gradient(90deg, #2563eb, #06b6d4);
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    .preloader-role {
+        font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+        font-weight: 500;
+        letter-spacing: 0.35em;
+        text-align: center;
+        color: #38bdf8; /* Sky Blue Accent */
+        margin: 0;
+        text-transform: uppercase;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    /* Progress */
+    .progress-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        max-width: 220px;
+        opacity: 0;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+        border-radius: 2px;
+    }
+
+    .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #2563eb, #06b6d4); /* Gradient Fill Biru-Cyan */
+        position: relative;
+        box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+    }
+
+    .progress-number {
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: #38bdf8;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.1em;
+    }
+
+    /* Corner Decorations Cyan Accent */
+    .preloader-corner {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        opacity: 0;
+    }
+
+    .preloader-corner::before,
+    .preloader-corner::after {
+        content: "";
+        position: absolute;
+        background: #06b6d4;
+    }
+
+    .preloader-corner::before {
+        width: 20px;
+        height: 1px;
+    }
+
+    .preloader-corner::after {
+        width: 1px;
+        height: 20px;
+    }
+
+    .corner-tl {
+        top: 2rem;
+        left: 2rem;
+    }
+
+    .corner-tl::before,
+    .corner-tl::after {
+        top: 0;
+        left: 0;
+    }
+
+    .corner-tr {
+        top: 2rem;
+        right: 2rem;
+    }
+
+    .corner-tr::before,
+    .corner-tr::after {
+        top: 0;
+        right: 0;
+    }
+
+    .corner-bl {
+        bottom: 2rem;
+        left: 2rem;
+    }
+
+    .corner-bl::before,
+    .corner-bl::after {
+        bottom: 0;
+        left: 0;
+    }
+
+    .corner-br {
+        bottom: 2rem;
+        right: 2rem;
+    }
+
+    .corner-br::before,
+    .corner-br::after {
+        bottom: 0;
+        right: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .preloader-name {
+            font-size: 1.25rem;
+            letter-spacing: 0.08em;
+        }
+
+        .preloader-role {
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+        }
+
+        .preloader-corner {
+            width: 15px;
+            height: 15px;
+        }
+
+        .preloader-corner::before {
+            width: 15px;
+        }
+
+        .preloader-corner::after {
+            height: 15px;
+        }
+
+        .corner-tl,
+        .corner-tr,
+        .corner-bl,
+        .corner-br {
+            top: 1rem;
+            right: 1rem;
+            bottom: 1rem;
+            left: 1rem;
+        }
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+
+    // Preloader Animation Timeline
+    const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
+    });
+
+    // Corner decorations
+    tl.to(".preloader-corner", {
+        opacity: 1,
+        duration: 0.2,
+        stagger: 0.02,
+    });
+
+    // Name characters
+    tl.to(
+        ".char",
+        {
+            opacity: 1,
+            y: 0,
+            stagger: 0.02,
+            duration: 0.3,
+            ease: "power2.out",
+        },
+        "-=0.1",
+    );
+
+    // Divider
+    tl.to(
+        ".divider",
+        {
+            opacity: 1,
+            scaleX: 1,
+            duration: 0.3,
+            ease: "power2.out",
+        },
+        "-=0.1",
+    );
+
+    // Role
+    tl.to(
+        ".preloader-role",
+        {
+            opacity: 1,
+            y: 0,
+            duration: 0.3,
+        },
+        "-=0.1",
+    );
+
+    // Progress
+    tl.to(
+        ".progress-container",
+        {
+            opacity: 1,
+            duration: 0.2,
+        },
+        "-=0.1",
+    );
+
+    // Progress counter
+    const progressObj = { value: 0 };
+    const progressNumber = document.querySelector(".progress-number");
+
+    tl.to(
+        progressObj,
+        {
+            value: 100,
+            duration: 0.5,
+            ease: "power1.inOut",
+            onUpdate: () => {
+                if (progressNumber) {
+                    progressNumber.textContent = Math.round(
+                        progressObj.value,
+                    ).toString();
+                }
+                gsap.to(".progress-fill", {
+                    width: `${progressObj.value}%`,
+                    duration: 0.05,
+                });
+            },
+        },
+        "-=0.1",
+    );
+
+    // Exit animation
+    tl.to(
+        ".progress-container",
+        {
+            opacity: 0,
+            duration: 0.2,
+        },
+        "+=0.1",
+    );
+
+    tl.to(
+        ".preloader-role",
+        {
+            opacity: 0,
+            y: -20,
+            duration: 0.2,
+        },
+        "-=0.1",
+    );
+
+    tl.to(
+        ".divider",
+        {
+            opacity: 0,
+            scaleX: 0,
+            duration: 0.2,
+        },
+        "-=0.1",
+    );
+
+    tl.to(
+        ".char",
+        {
+            opacity: 0,
+            y: -40,
+            stagger: 0.01,
+            duration: 0.2,
+        },
+        "-=0.1",
+    );
+
+    tl.to(
+        ".preloader-corner",
+        {
+            opacity: 0,
+            duration: 0.2,
+            stagger: 0.01,
+        },
+        "-=0.1",
+    );
+
+    tl.to(
+        ".preloader",
+        {
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.inOut",
+            onComplete: () => {
+                const preloader = document.querySelector(
+                    ".preloader",
+                ) as HTMLElement;
+                if (preloader) {
+                    preloader.style.display = "none";
+                }
+                document.body.style.overflow = "auto";
+            },
+        },
+        "-=0.1",
+    );
+
+    // Disable scrolling
+    document.body.style.overflow = "hidden";
+
+    // Start animation after minimum time
+    const minTime = 150;
+    const startTime = Date.now();
+
+    window.addEventListener("load", () => {
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, minTime - elapsed);
+
+        setTimeout(() => {
+            tl.play();
+        }, remaining);
+    });
+</script>

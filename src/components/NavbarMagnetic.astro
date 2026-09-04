@@ -1,0 +1,203 @@
+---
+// Navbar Magnetic Effect Component (Blue Accent Theme)
+---
+
+<script>
+    import { gsap } from 'gsap';
+
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', () => {
+        // Magnetic effect for nav links
+        const navLinks = document.querySelectorAll('.nav-link');
+        const navCta = document.querySelector('.nav-cta');
+        const logo = document.querySelector('.logo');
+
+        // Magnetic effect function
+        const addMagneticEffect = (element: Element, strength = 0.3) => {
+            const el = element as HTMLElement;
+
+            el.addEventListener('mouseenter', () => {
+                // Add active state
+                el.style.willChange = 'transform';
+            });
+
+            el.addEventListener('mousemove', (e: MouseEvent) => {
+                const rect = el.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                const deltaX = (e.clientX - centerX) * strength;
+                const deltaY = (e.clientY - centerY) * strength;
+
+                gsap.to(el, {
+                    x: deltaX,
+                    y: deltaY,
+                    duration: 0.4,
+                    ease: 'power2.out',
+                });
+
+                // Move inner elements more dramatically
+                const innerEl = el.querySelector('.nav-link-text, .cta-text, .logo-text');
+                if (innerEl) {
+                    gsap.to(innerEl, {
+                        x: deltaX * 0.5,
+                        y: deltaY * 0.5,
+                        duration: 0.3,
+                        ease: 'power2.out',
+                    });
+                }
+            });
+
+            el.addEventListener('mouseleave', () => {
+                gsap.to(el, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.6,
+                    ease: 'elastic.out(1, 0.5)',
+                });
+
+                const innerEl = el.querySelector('.nav-link-text, .cta-text, .logo-text');
+                if (innerEl) {
+                    gsap.to(innerEl, {
+                        x: 0,
+                        y: 0,
+                        duration: 0.6,
+                        ease: 'elastic.out(1, 0.5)',
+                    });
+                }
+
+                el.style.willChange = 'auto';
+            });
+        };
+
+        // Apply magnetic effect to nav links
+        navLinks.forEach((link) => {
+            addMagneticEffect(link, 0.25); // Subtle movement
+        });
+
+        // Apply to CTA button with stronger effect
+        if (navCta) {
+            addMagneticEffect(navCta, 0.35);
+        }
+
+        // Apply to logo with very subtle effect
+        if (logo) {
+            addMagneticEffect(logo, 0.15);
+        }
+
+        // Add scale effect on hover for nav links
+        navLinks.forEach((link) => {
+            link.addEventListener('mouseenter', () => {
+                gsap.to(link, {
+                    scale: 1.05,
+                    duration: 0.3,
+                    ease: 'power2.out',
+                });
+            });
+
+            link.addEventListener('mouseleave', () => {
+                gsap.to(link, {
+                    scale: 1,
+                    duration: 0.4,
+                    ease: 'elastic.out(1, 0.5)',
+                });
+            });
+        });
+
+        // CTA button hover effect
+        if (navCta) {
+            const ctaSvg = navCta.querySelector('svg');
+
+            navCta.addEventListener('mouseenter', () => {
+                gsap.to(navCta, {
+                    scale: 1.05,
+                    duration: 0.3,
+                    ease: 'power2.out',
+                });
+
+                if (ctaSvg) {
+                    gsap.to(ctaSvg, {
+                        x: 3,
+                        duration: 0.3,
+                        ease: 'power2.out',
+                    });
+                }
+            });
+
+            navCta.addEventListener('mouseleave', () => {
+                gsap.to(navCta, {
+                    scale: 1,
+                    duration: 0.4,
+                    ease: 'elastic.out(1, 0.5)',
+                });
+
+                if (ctaSvg) {
+                    gsap.to(ctaSvg, {
+                        x: 0,
+                        duration: 0.4,
+                        ease: 'elastic.out(1, 0.5)',
+                    });
+                }
+            });
+        }
+
+        // Logo hover effect
+        if (logo) {
+            const logoDot = logo.querySelector('.logo-dot');
+
+            logo.addEventListener('mouseenter', () => {
+                if (logoDot) {
+                    gsap.to(logoDot, {
+                        scale: 1.3,
+                        color: '#38bdf8', // Sky Blue Accent (Diubah dari #00ff88)
+                        duration: 0.3,
+                        ease: 'back.out(2)',
+                    });
+                }
+            });
+
+            logo.addEventListener('mouseleave', () => {
+                if (logoDot) {
+                    gsap.to(logoDot, {
+                        scale: 1,
+                        color: '#ffffff',
+                        duration: 0.4,
+                        ease: 'elastic.out(1, 0.5)',
+                    });
+                }
+            });
+        }
+    });
+</script>
+
+<style>
+    /* Additional styles for magnetic effect */
+    :global(.nav-link),
+    :global(.nav-cta),
+    :global(.logo) {
+        will-change: transform;
+        transform-origin: center;
+    }
+
+    :global(.nav-link-text),
+    :global(.cta-text),
+    :global(.logo-text) {
+        display: inline-block;
+        will-change: transform;
+    }
+
+    /* Ensure smooth transitions */
+    :global(.nav-link),
+    :global(.nav-cta) {
+        transition: background-color 0.3s ease;
+    }
+
+    /* Add subtle glow on hover */
+    :global(.nav-link:hover) {
+        filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.2));
+    }
+
+    :global(.nav-cta:hover) {
+        filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.3));
+    }
+</style>

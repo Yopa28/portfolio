@@ -1,0 +1,568 @@
+---
+import Button from './Button.astro';
+import Starfield from './Starfield.astro';
+import AbstractShapes from './AbstractShapes.astro';
+
+interface Props {
+	name?: string;
+	title?: string;
+	description?: string;
+	primaryButtonText?: string;
+	primaryButtonHref?: string;
+	secondaryButtonText?: string;
+	secondaryButtonHref?: string;
+}
+
+const {
+	name = "Sandy Yopa Boangmanalu",
+	title = "Fullstack Engineer",
+	description = "Fullstack Engineer yang berpengalaman membangun platform produksi end-to-end dari skema database hingga UI. Menguasai Laravel, Express.js, Vue.js, dan Flutter.",
+	primaryButtonText = "HUBUNGI SAYA",
+	primaryButtonHref = "#contact",
+	secondaryButtonText = "LIHAT PROYEK",
+	secondaryButtonHref = "#projects",
+} = Astro.props;
+---
+
+<section class="hero-vibrant">
+	<Starfield density="high" animated={true} />
+	<AbstractShapes variant="hero" />
+
+	<div class="container">
+		<div class="hero-content">
+			<div class="hero-label">
+				<span class="label-dot"></span>
+				<span class="label-text">Terbuka untuk Remote & Relokasi</span>
+			</div>
+
+			<div class="hero-greeting">
+				<span class="greeting-text">Halo! Saya</span>
+				<h1 class="hero-name">
+					<span class="gradient-text-vibrant">{name}</span>
+				</h1>
+			</div>
+
+			<h2 class="hero-title">{title}</h2>
+
+			<p class="hero-description">
+				{description}
+			</p>
+
+			<div class="hero-actions">
+				<Button variant="primary" size="large" href={primaryButtonHref}>
+					{primaryButtonText}
+				</Button>
+				<Button variant="secondary" size="large" href={secondaryButtonHref}>
+					{secondaryButtonText}
+				</Button>
+			</div>
+
+			<div class="hero-social">
+				<a href="https://github.com/Yopa28" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+					</svg>
+				</a>
+				<a href="https://linkedin.com/in/sandyyopa/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+					</svg>
+				</a>
+				<a href="https://sandyopa.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Website">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="10"></circle>
+						<line x1="2" y1="12" x2="22" y2="12"></line>
+						<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+					</svg>
+				</a>
+				<a href="mailto:sandyboangmanalu@gmail.com" class="social-link" aria-label="Email">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+						<polyline points="22,6 12,13 2,6"></polyline>
+					</svg>
+				</a>
+			</div>
+		</div>
+
+		<div class="hero-visual">
+			<div class="visual-wrapper">
+				<div class="visual-glow"></div>
+				<div class="visual-frame">
+					<div class="frame-content">
+						<div class="code-snippet">
+							<div class="code-line"><span class="code-keyword">const</span> <span class="code-variable">engineer</span> = {</div>
+							<div class="code-line indent-1">name: <span class="code-string">'Sandy Yopa B.'</span>,</div>
+							<div class="code-line indent-1">degree: <span class="code-string">'Informatics'</span>,</div>
+							<div class="code-line indent-1">skills: [<span class="code-string">'Vue'</span>, <span class="code-string">'Laravel'</span>, <span class="code-string">'Express'</span>, <span class="code-string">'Flutter'</span>],</div>
+							<div class="code-line indent-1">focus: <span class="code-string">'Fullstack & Mobile 🚀'</span></div>
+							<div class="code-line">}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="scroll-indicator">
+		<div class="scroll-line"></div>
+		<span class="scroll-text">Scroll</span>
+	</div>
+</section>
+
+<style>
+	.hero-vibrant {
+		position: relative;
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #0a0a0f;
+		color: #ffffff;
+		overflow: hidden;
+		padding: 8rem 0 4rem;
+	}
+
+	.container {
+		position: relative;
+		max-width: 1400px;
+		margin: 0 auto;
+		padding: 0 2rem;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+		align-items: center;
+	}
+
+	/* Hero Content */
+	.hero-content {
+		max-width: 600px;
+	}
+
+	.hero-label {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem 1rem;
+		background: rgba(6, 182, 212, 0.1); /* Cyan 500 */
+		border: 1px solid rgba(6, 182, 212, 0.3);
+		border-radius: 2rem;
+		margin-bottom: 2rem;
+		animation: pulse-cyan 2s ease-in-out infinite;
+	}
+
+	.label-dot {
+		width: 8px;
+		height: 8px;
+		background: #06b6d4; /* Cyan 500 */
+		border-radius: 50%;
+		animation: blink 2s ease-in-out infinite;
+	}
+
+	.label-text {
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: #38bdf8; /* Sky Blue 400 */
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	@keyframes pulse-cyan {
+		0%, 100% {
+			box-shadow: 0 0 0 rgba(6, 182, 212, 0.3);
+		}
+		50% {
+			box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+		}
+	}
+
+	@keyframes blink {
+		0%, 100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.3;
+		}
+	}
+
+	.hero-greeting {
+		margin-bottom: 1rem;
+	}
+
+	.greeting-text {
+		font-size: 1.5rem;
+		font-weight: 400;
+		color: rgba(255, 255, 255, 0.7);
+		display: block;
+		margin-bottom: 0.5rem;
+	}
+
+	.hero-name {
+		font-size: clamp(2.5rem, 6vw, 4.5rem);
+		font-weight: 900;
+		line-height: 1.1;
+		margin: 0;
+		letter-spacing: -0.03em;
+	}
+
+	/* Gradient Nama: Blue - Cyan - Sky Blue */
+	.gradient-text-vibrant {
+		background: linear-gradient(135deg, #2563eb 0%, #3b82f6 40%, #06b6d4 80%, #38bdf8 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		background-size: 200% 200%;
+		animation: gradient-shift 5s ease infinite;
+		display: inline-block;
+	}
+
+	@keyframes gradient-shift {
+		0%, 100% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+	}
+
+	.hero-title {
+		font-size: clamp(1.5rem, 3vw, 2.5rem);
+		font-weight: 700;
+		color: #ffffff;
+		margin: 1rem 0 1.5rem;
+		letter-spacing: -0.01em;
+	}
+
+	.hero-description {
+		font-size: 1.125rem;
+		line-height: 1.8;
+		color: rgba(255, 255, 255, 0.6);
+		margin-bottom: 2.5rem;
+		max-width: 500px;
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+		margin-bottom: 3rem;
+	}
+
+	.hero-social {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.social-link {
+		width: 48px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 50%;
+		color: rgba(255, 255, 255, 0.7);
+		transition: all 0.3s ease;
+		backdrop-filter: blur(10px);
+	}
+
+	.social-link:hover {
+		background: rgba(59, 130, 246, 0.2);
+		border-color: rgba(59, 130, 246, 0.5);
+		color: #ffffff;
+		transform: translateY(-3px);
+		box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+	}
+
+	.social-link svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	/* Hero Visual */
+	.hero-visual {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.visual-wrapper {
+		position: relative;
+		width: 100%;
+		max-width: 500px;
+		aspect-ratio: 1;
+	}
+
+	/* Radial Glow Blue Theme */
+	.visual-glow {
+		position: absolute;
+		inset: -20%;
+		background: radial-gradient(
+			circle,
+			rgba(37, 99, 235, 0.3) 0%,
+			rgba(6, 182, 212, 0.2) 40%,
+			rgba(56, 189, 248, 0.1) 60%,
+			transparent 80%
+		);
+		filter: blur(60px);
+		animation: rotate-glow 20s linear infinite;
+	}
+
+	@keyframes rotate-glow {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.visual-frame {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(10, 15, 30, 0.9));
+		border-radius: 24px;
+		padding: 2px;
+		overflow: hidden;
+	}
+
+	.visual-frame::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: 24px;
+		padding: 2px;
+		background: linear-gradient(
+			135deg,
+			rgba(37, 99, 235, 0.5) 0%,
+			rgba(6, 182, 212, 0.5) 50%,
+			rgba(56, 189, 248, 0.5) 100%
+		);
+		-webkit-mask:
+			linear-gradient(#fff 0 0) content-box,
+			linear-gradient(#fff 0 0);
+		-webkit-mask-composite: xor;
+		mask-composite: exclude;
+		animation: border-flow 3s linear infinite;
+	}
+
+	@keyframes border-flow {
+		0%, 100% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+	}
+
+	.frame-content {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		background: rgba(10, 15, 30, 0.95);
+		border-radius: 22px;
+		padding: 3rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		backdrop-filter: blur(10px);
+	}
+
+	.code-snippet {
+		font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+		font-size: 0.875rem;
+		line-height: 1.8;
+		color: rgba(255, 255, 255, 0.8);
+	}
+
+	.code-line {
+		margin: 0.25rem 0;
+	}
+
+	.indent-1 {
+		padding-left: 2rem;
+	}
+
+	.code-keyword {
+		color: #c792ea;
+	}
+
+	.code-variable {
+		color: #38bdf8;
+	}
+
+	.code-string {
+		color: #34d399;
+	}
+
+	/* Scroll Indicator */
+	.scroll-indicator {
+		position: absolute;
+		bottom: 3rem;
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		z-index: 2;
+		opacity: 0.6;
+		animation: bounce 2s ease-in-out infinite;
+	}
+
+	.scroll-line {
+		width: 2px;
+		height: 60px;
+		background: linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.8), transparent);
+		border-radius: 2px;
+	}
+
+	.scroll-text {
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: rgba(255, 255, 255, 0.5);
+	}
+
+	@keyframes bounce {
+		0%, 100% {
+			transform: translateX(-50%) translateY(0);
+		}
+		50% {
+			transform: translateX(-50%) translateY(10px);
+		}
+	}
+
+	/* Responsive Design */
+	@media (max-width: 1024px) {
+		.container {
+			grid-template-columns: 1fr;
+			gap: 3rem;
+			text-align: center;
+		}
+
+		.hero-content {
+			max-width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.hero-description {
+			max-width: 600px;
+		}
+
+		.hero-actions {
+			justify-content: center;
+		}
+
+		.hero-social {
+			justify-content: center;
+		}
+
+		.visual-wrapper {
+			max-width: 400px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.hero-vibrant {
+			padding: 6rem 0 3rem;
+		}
+
+		.container {
+			padding: 0 1.5rem;
+			gap: 2rem;
+		}
+
+		.hero-name {
+			font-size: 2.8rem;
+		}
+
+		.hero-title {
+			font-size: 1.5rem;
+		}
+
+		.hero-description {
+			font-size: 1rem;
+			margin-bottom: 2rem;
+		}
+
+		.hero-actions {
+			gap: 0.75rem;
+			margin-bottom: 2rem;
+		}
+
+		.social-link {
+			width: 44px;
+			height: 44px;
+		}
+
+		.visual-wrapper {
+			max-width: 320px;
+		}
+
+		.frame-content {
+			padding: 2rem;
+		}
+
+		.code-snippet {
+			font-size: 0.75rem;
+		}
+
+		.scroll-indicator {
+			bottom: 2rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.hero-vibrant {
+			padding: 5rem 0 2rem;
+		}
+
+		.container {
+			padding: 0 1rem;
+		}
+
+		.hero-name {
+			font-size: 2.2rem;
+		}
+
+		.hero-title {
+			font-size: 1.25rem;
+		}
+
+		.hero-actions {
+			flex-direction: column;
+			width: 100%;
+		}
+
+		.hero-actions :global(.btn) {
+			width: 100%;
+		}
+
+		.visual-wrapper {
+			max-width: 280px;
+		}
+
+		.frame-content {
+			padding: 1.5rem;
+		}
+
+		.code-snippet {
+			font-size: 0.7rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.gradient-text-vibrant,
+		.visual-glow,
+		.scroll-indicator,
+		.label-dot {
+			animation: none;
+		}
+	}
+</style>

@@ -1,0 +1,621 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ABOUT } from "../config/site";
+---
+
+<Layout title="About - Portfolio">
+    <main class="about-page">
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <div class="container">
+                <div class="about-hero-content">
+                    <span class="page-label">{ABOUT.pageLabel}</span>
+                    <h1 class="page-title">
+                        {
+                            ABOUT.pageTitle.map((word) => (
+                                <span class="title-line">
+                                    <span class="word">{word}</span>
+                                </span>
+                            ))
+                        }
+                    </h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Content -->
+        <section class="about-content">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p class="intro-text">
+                            {ABOUT.intro}
+                        </p>
+                        <div class="text-content">
+                            {
+                                ABOUT.paragraphs.map((paragraph) => (
+                                    <p>{paragraph}</p>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <div class="about-stats">
+                        {
+                            ABOUT.stats.map((stat) => (
+                                <div class="stat-item">
+                                    <div class="stat-number">{stat.number}</div>
+                                    <div class="stat-label">{stat.label}</div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-label">
+                        {ABOUT.skills.sectionLabel}
+                    </span>
+                    <h2 class="section-title">{ABOUT.skills.sectionTitle}</h2>
+                </div>
+
+                <div class="skills-grid">
+                    {
+                        ABOUT.skills.categories.map((category) => (
+                            <div class="skill-category">
+                                <h3 class="skill-title">{category.title}</h3>
+                                <ul class="skill-list">
+                                    {category.items.map((item) => (
+                                        <li>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="experience-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-label">
+                        {ABOUT.experience.sectionLabel}
+                    </span>
+                    <h2 class="section-title">
+                        {ABOUT.experience.sectionTitle}
+                    </h2>
+                </div>
+
+                <div class="timeline">
+                    {
+                        ABOUT.experience.timeline.map((item) => (
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date">
+                                        {item.date}
+                                    </span>
+                                    <h3 class="timeline-title">{item.title}</h3>
+                                    <p class="timeline-company">
+                                        {item.company}
+                                    </p>
+                                    <p class="timeline-description">
+                                        {item.description}
+                                    </p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">{ABOUT.cta.title}</h2>
+                    <p class="cta-description">
+                        {ABOUT.cta.description}
+                    </p>
+                    <button
+                        onclick="scrollToSection('contact')"
+                        class="btn-cta bg-transparent border-0 cursor-pointer"
+                    >
+                        {ABOUT.cta.buttonText}
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    .about-page {
+        padding-top: 80px;
+        min-height: 100vh;
+        background: var(--color-bg-primary);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Hero Section */
+    .about-hero {
+        padding: 8rem 0 6rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .about-hero-content {
+        max-width: 800px;
+    }
+
+    .page-label {
+        display: inline-block;
+        color: #38bdf8; /* Sky Blue */
+        font-size: 0.875rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 3rem;
+        opacity: 0;
+    }
+
+    .page-title {
+        font-size: clamp(3rem, 8vw, 6rem);
+        font-weight: 400;
+        line-height: 1.1;
+        margin-bottom: 2rem;
+        letter-spacing: -0.02em;
+        color: #ffffff;
+    }
+
+    .title-line {
+        display: block;
+        overflow: hidden;
+        padding: 0.2rem 0;
+    }
+
+    .word {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(60px);
+    }
+
+    /* About Content */
+    .about-content {
+        padding: 6rem 0;
+    }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 6rem;
+    }
+
+    .intro-text {
+        font-size: clamp(1.25rem, 2vw, 1.5rem);
+        line-height: 1.6;
+        margin-bottom: 3rem;
+        color: #ffffff;
+        font-weight: 300;
+        opacity: 0;
+    }
+
+    .text-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .text-content p {
+        color: #a1a1aa;
+        line-height: 1.8;
+        font-size: 1rem;
+        font-weight: 300;
+        opacity: 0;
+    }
+
+    .about-stats {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        padding-top: 2rem;
+    }
+
+    .stat-item {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 1.5rem;
+        opacity: 0;
+    }
+
+    .stat-number {
+        font-size: 3.5rem;
+        font-weight: 400;
+        background: linear-gradient(135deg, #38bdf8, #06b6d4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
+        line-height: 1;
+    }
+
+    .stat-label {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 500;
+    }
+
+    /* Skills Section */
+    .skills-section {
+        padding: 6rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .section-header {
+        margin-bottom: 4rem;
+    }
+
+    .section-label {
+        display: inline-block;
+        color: #06b6d4; /* Cyan Accent */
+        font-size: 0.875rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 400;
+        color: #ffffff;
+        margin: 0;
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .skill-category {
+        padding: 3rem 2rem;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .skill-category:hover {
+        background: rgba(37, 99, 235, 0.04);
+    }
+
+    .skill-category:nth-child(4n) {
+        border-right: none;
+    }
+
+    .skill-title {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        color: #ffffff;
+    }
+
+    .skill-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .skill-list li {
+        color: #a1a1aa;
+        font-size: 0.95rem;
+        font-weight: 300;
+        line-height: 1.6;
+    }
+
+    /* Experience Section */
+    .experience-section {
+        padding: 6rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .timeline {
+        max-width: 800px;
+        margin-top: 4rem;
+    }
+
+    .timeline-item {
+        position: relative;
+        padding-bottom: 3rem;
+        border-left: 1px solid rgba(56, 189, 248, 0.2);
+        padding-left: 3rem;
+        margin-left: 0;
+        opacity: 0;
+    }
+
+    .timeline-item:last-child {
+        border-left: none;
+        padding-bottom: 0;
+    }
+
+    .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -5px;
+        top: 0;
+        width: 9px;
+        height: 9px;
+        background: #06b6d4; /* Cyan Dot */
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(6, 182, 212, 0.8);
+    }
+
+    .timeline-content {
+        padding-top: 0.5rem;
+    }
+
+    .timeline-date {
+        display: inline-block;
+        font-size: 0.875rem;
+        color: #38bdf8;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    .timeline-title {
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+        color: #ffffff;
+    }
+
+    .timeline-company {
+        color: #a1a1aa;
+        margin-bottom: 1rem;
+        font-weight: 300;
+        font-size: 1rem;
+    }
+
+    .timeline-description {
+        color: #a1a1aa;
+        line-height: 1.7;
+        font-weight: 300;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        padding: 6rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .cta-content {
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .cta-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 400;
+        margin-bottom: 1rem;
+        color: #ffffff;
+        opacity: 0;
+    }
+
+    .cta-description {
+        font-size: 1rem;
+        color: #a1a1aa;
+        margin-bottom: 2.5rem;
+        font-weight: 300;
+        opacity: 0;
+    }
+
+    .btn-cta {
+        display: inline-block;
+        padding: 0.875rem 2rem;
+        background: linear-gradient(135deg, #2563eb, #06b6d4);
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border-radius: 9999px;
+        transition: all 0.3s ease;
+        opacity: 0;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .skills-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .skill-category:nth-child(2n) {
+            border-right: none;
+        }
+
+        .skill-category:nth-child(4n) {
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .about-hero {
+            padding: 6rem 0 4rem;
+        }
+
+        .about-grid {
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+
+        .skills-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .skill-category {
+            border-right: none !important;
+        }
+
+        .timeline-item {
+            padding-left: 2rem;
+        }
+
+        .page-title {
+            font-size: 3rem;
+        }
+
+        .intro-text {
+            font-size: 1.25rem;
+        }
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero animations
+    gsap.to(".page-label", {
+        opacity: 1,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "power3.out",
+    });
+
+    gsap.to(".title-line .word", {
+        y: 0,
+        opacity: 1,
+        stagger: 0.2,
+        duration: 1,
+        delay: 0.5,
+        ease: "power3.out",
+    });
+
+    // About content animations
+    gsap.to(".intro-text", {
+        scrollTrigger: {
+            trigger: ".about-content",
+            start: "top 80%",
+            once: true,
+        },
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+    });
+
+    gsap.to(".text-content p", {
+        scrollTrigger: {
+            trigger: ".about-content",
+            start: "top 70%",
+            once: true,
+        },
+        opacity: 1,
+        y: 0,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power3.out",
+    });
+
+    // Stats animations
+    gsap.to(".stat-item", {
+        scrollTrigger: {
+            trigger: ".about-stats",
+            start: "top 80%",
+            once: true,
+        },
+        opacity: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "power3.out",
+    });
+
+    // Skills animations
+    gsap.to(".skill-category", {
+        scrollTrigger: {
+            trigger: ".skills-section",
+            start: "top 80%",
+            once: true,
+        },
+        opacity: 1,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power3.out",
+    });
+
+    // Timeline animations
+    gsap.to(".timeline-item", {
+        scrollTrigger: {
+            trigger: ".experience-section",
+            start: "top 80%",
+            once: true,
+        },
+        opacity: 1,
+        x: 0,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power3.out",
+    });
+
+    // CTA animations
+    gsap.to(".cta-title", {
+        scrollTrigger: {
+            trigger: ".cta-section",
+            start: "top 80%",
+            once: true,
+        },
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+    });
+
+    gsap.to(".cta-description", {
+        scrollTrigger: {
+            trigger: ".cta-section",
+            start: "top 80%",
+            once: true,
+        },
+        opacity: 1,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "power3.out",
+    });
+
+    gsap.to(".btn-cta", {
+        scrollTrigger: {
+            trigger: ".cta-section",
+            start: "top 80%",
+            once: true,
+        },
+        opacity: 1,
+        duration: 0.8,
+        delay: 0.4,
+        ease: "power3.out",
+    });
+</script>

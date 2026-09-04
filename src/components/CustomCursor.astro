@@ -1,0 +1,414 @@
+---
+// Custom Cursor Component with Text Reveal Effect (Blue Theme)
+---
+
+<div class="cursor-wrapper">
+	<div class="cursor-dot"></div>
+	<div class="cursor-circle"></div>
+</div>
+
+<style>
+	.cursor-wrapper {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+		z-index: 9999;
+	}
+
+	.cursor-dot {
+		position: fixed;
+		width: 8px;
+		height: 8px;
+		background: #ffffff;
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+		pointer-events: none;
+		z-index: 10001;
+		mix-blend-mode: difference;
+		opacity: 0;
+	}
+
+	.cursor-circle {
+		position: fixed;
+		width: 40px;
+		height: 40px;
+		border: 2px solid rgba(59, 130, 246, 0.6); /* Cyan/Blue border glow */
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+		pointer-events: none;
+		z-index: 10000;
+		transition:
+			width 0.3s ease,
+			height 0.3s ease,
+			border-color 0.3s ease;
+		mix-blend-mode: difference;
+		opacity: 0;
+	}
+
+	/* Hide on mobile/tablet */
+	@media (max-width: 1024px), (hover: none) {
+		.cursor-wrapper {
+			display: none;
+		}
+	}
+
+	/* Text hover effect styles */
+	:global(.cursor-text-target) {
+		position: relative;
+		cursor: default;
+		display: inline-block;
+	}
+
+	/* Preloader: preserve flex layout from parent .word */
+	:global(.preloader-name .word.cursor-text-target) {
+		display: flex !important;
+		justify-content: center !important;
+	}
+
+	/* Original text wrapper - must match parent display */
+	:global(.cursor-text-target .text-original-layer) {
+		position: relative;
+		z-index: 1;
+		display: inline-block !important;
+		/* Inherit all text properties for perfect responsive match */
+		color: inherit !important;
+		opacity: 1 !important;
+		visibility: visible !important;
+		font-size: inherit !important;
+		font-weight: inherit !important;
+		font-family: inherit !important;
+		line-height: inherit !important;
+		letter-spacing: inherit !important;
+		text-transform: inherit !important;
+		white-space: inherit !important;
+		word-break: inherit !important;
+	}
+
+	/* Preloader: preserve flex layout for centered chars */
+	:global(.preloader-name .word.cursor-text-target .text-original-layer) {
+		display: flex !important;
+		justify-content: center !important;
+	}
+
+	/* Special handling for preloader: preserve GSAP char animations */
+	:global(
+		.preloader-name .word.cursor-text-target .text-original-layer .char
+	) {
+		opacity: inherit !important;
+		transform: inherit !important;
+	}
+
+	/* Blue/Cyan text overlay that appears on hover */
+	:global(.cursor-text-target .text-reveal-layer) {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		color: #38bdf8 !important; /* Sky Blue Accent */
+		clip-path: circle(0px at var(--mouse-x, 50%) var(--mouse-y, 50%));
+		transition: clip-path 0.3s ease;
+		pointer-events: none;
+		z-index: 2;
+		/* Inherit all text properties for perfect responsive match */
+		font-size: inherit !important;
+		font-weight: inherit !important;
+		font-family: inherit !important;
+		line-height: inherit !important;
+		letter-spacing: inherit !important;
+		text-transform: inherit !important;
+		white-space: inherit !important;
+		word-break: inherit !important;
+		display: inline-block !important;
+	}
+
+	/* Preloader: preserve flex layout for centered chars in reveal layer */
+	:global(.preloader-name .word.cursor-text-target .text-reveal-layer) {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+	}
+
+	/* Force all nested elements in reveal layer to be cyan/blue and visible */
+	:global(.cursor-text-target .text-reveal-layer *) {
+		color: #38bdf8 !important;
+		opacity: 1 !important;
+		transform: none !important;
+	}
+
+	:global(.cursor-text-target:hover .text-reveal-layer) {
+		clip-path: circle(150px at var(--mouse-x, 50%) var(--mouse-y, 50%));
+	}
+
+	/* Enlarge cursor on hover */
+	:global(body.cursor-hover) .cursor-circle {
+		width: 80px;
+		height: 80px;
+		border-color: rgba(56, 189, 248, 0.8);
+	}
+
+	:global(body.cursor-hover) .cursor-dot {
+		transform: translate(-50%, -50%) scale(0.5);
+		opacity: 0.5 !important;
+	}
+</style>
+
+<script>
+	import { gsap } from "gsap";
+
+	// Check if device supports hover (desktop only)
+	const hasHover = window.matchMedia(
+		"(hover: hover) and (min-width: 1025px)",
+	).matches;
+
+	if (hasHover) {
+		const cursorDot = document.querySelector(".cursor-dot") as HTMLElement;
+		const cursorCircle = document.querySelector(
+			".cursor-circle",
+		) as HTMLElement;
+
+		if (cursorDot && cursorCircle) {
+			// Hide default cursor on all elements
+			const styleSheet = document.createElement("style");
+			styleSheet.textContent = "* { cursor: none !important; }";
+			document.head.appendChild(styleSheet);
+
+			// Mouse position
+			let mouseX = 0;
+			let mouseY = 0;
+			let dotX = 0;
+			let dotY = 0;
+			let circleX = 0;
+			let circleY = 0;
+
+			// Show cursors immediately
+			cursorDot.style.opacity = "1";
+			cursorCircle.style.opacity = "1";
+
+			// Update mouse position
+			document.addEventListener("mousemove", (e) => {
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+			});
+
+			// Smooth follow animation using requestAnimationFrame
+			function animateCursor() {
+				// Lerp (linear interpolation) for smooth follow
+				const dotSpeed = 0.2; // Higher = faster (0-1)
+				const circleSpeed = 0.15; // Slower for trailing effect
+
+				dotX += (mouseX - dotX) * dotSpeed;
+				dotY += (mouseY - dotY) * dotSpeed;
+
+				circleX += (mouseX - circleX) * circleSpeed;
+				circleY += (mouseY - circleY) * circleSpeed;
+
+				// Apply transform
+				cursorDot.style.left = dotX + "px";
+				cursorDot.style.top = dotY + "px";
+
+				cursorCircle.style.left = circleX + "px";
+				cursorCircle.style.top = circleY + "px";
+
+				requestAnimationFrame(animateCursor);
+			}
+
+			// Start animation
+			animateCursor();
+
+			// Add hover effect for interactive elements
+			const addHoverEffect = () => {
+				const interactiveElements = document.querySelectorAll(
+					"a, button, .btn, .magnetic, .contact-card, .project-card",
+				);
+
+				interactiveElements.forEach((el) => {
+					el.addEventListener("mouseenter", () => {
+						document.body.classList.add("cursor-hover");
+					});
+
+					el.addEventListener("mouseleave", () => {
+						document.body.classList.remove("cursor-hover");
+					});
+				});
+			};
+
+			// Initial setup
+			addHoverEffect();
+
+			// Text reveal effect - ALL COMPONENTS
+			const setupTextReveal = () => {
+				// Target all major headings and titles
+				const targetSelectors = [
+					".hero-title .word", // Hero section words
+					".page-title .word", // About page hero words
+					".preloader-name .word", // Preloader name words
+					".title-word", // Title words in sections (Projects, Contact)
+					".project-title", // Individual project titles
+					".section-title", // Section titles
+					".skill-title", // About page skill category titles
+					".timeline-title", // About page experience titles
+					".cta-title", // About page CTA title
+				];
+
+				targetSelectors.forEach((selector) => {
+					const elements = document.querySelectorAll(selector);
+
+					elements.forEach((el: Element) => {
+						const htmlEl = el as HTMLElement;
+
+						// Skip if already processed (check first!)
+						if (htmlEl.hasAttribute("data-text-reveal-processed")) {
+							return;
+						}
+
+						// Skip if too small or empty
+						if (htmlEl.offsetHeight < 30) {
+							return;
+						}
+
+						// Get original text content FIRST before any processing
+						const originalText = htmlEl.textContent || "";
+
+						// Skip empty text
+						if (!originalText.trim()) {
+							return;
+						}
+
+						// Check if has nested children
+						const hasNestedElements = htmlEl.children.length > 0;
+
+						// Allow preloader with nested .char elements
+						const isPreloader =
+							htmlEl.closest(".preloader-name") !== null;
+
+						// Skip elements with nested children UNLESS it's preloader
+						if (hasNestedElements && !isPreloader) {
+							return;
+						}
+
+						// Skip if element is hidden (opacity: 0 from GSAP)
+						const computedOpacity =
+							window.getComputedStyle(htmlEl).opacity;
+						if (parseFloat(computedOpacity) < 0.1) {
+							return;
+						}
+
+						// Mark as being processed NOW to prevent race conditions
+						htmlEl.setAttribute(
+							"data-text-reveal-processed",
+							"true",
+						);
+
+						// Save original inner HTML BEFORE any modifications
+						const originalHTML = htmlEl.innerHTML;
+
+						// Add class for styling
+						htmlEl.classList.add("cursor-text-target");
+
+						// Wrap original content
+						const originalLayer = document.createElement("span");
+						originalLayer.className = "text-original-layer";
+
+						// Preserve innerHTML to maintain nested structures (like .char in preloader)
+						if (originalHTML && originalHTML.trim()) {
+							originalLayer.innerHTML = originalHTML;
+						} else {
+							originalLayer.textContent = originalText;
+						}
+
+						originalLayer.style.display = "inline-block";
+
+						// Create reveal layer (duplicate text for cyan effect)
+						const revealLayer = document.createElement("span");
+						revealLayer.className = "text-reveal-layer";
+						revealLayer.setAttribute("aria-hidden", "true");
+
+						// For preloader, clone HTML structure; for others, use textContent
+						if (isPreloader && hasNestedElements) {
+							revealLayer.innerHTML = originalHTML;
+						} else {
+							revealLayer.textContent = originalText;
+						}
+
+						// Clear and rebuild
+						htmlEl.innerHTML = "";
+						htmlEl.appendChild(originalLayer);
+						htmlEl.appendChild(revealLayer);
+
+						// Update mouse position for clip-path
+						htmlEl.addEventListener("mousemove", (e: Event) => {
+							const mouseEvent = e as MouseEvent;
+							const rect = htmlEl.getBoundingClientRect();
+							const x = mouseEvent.clientX - rect.left;
+							const y = mouseEvent.clientY - rect.top;
+
+							htmlEl.style.setProperty("--mouse-x", `${x}px`);
+							htmlEl.style.setProperty("--mouse-y", `${y}px`);
+						});
+
+						// Reset mouse position when leaving
+						htmlEl.addEventListener("mouseleave", () => {
+							htmlEl.style.setProperty("--mouse-x", "50%");
+							htmlEl.style.setProperty("--mouse-y", "50%");
+						});
+					});
+				});
+			};
+
+			// Initial setup - catch preloader early
+			setTimeout(() => {
+				setupTextReveal();
+				addHoverEffect();
+			}, 100);
+
+			// Re-setup after hero animation completes
+			setTimeout(() => {
+				setupTextReveal();
+				addHoverEffect();
+			}, 1500);
+
+			// Re-setup periodically to catch scroll-triggered elements
+			const checkInterval = setInterval(() => {
+				setupTextReveal();
+				addHoverEffect();
+			}, 1000);
+
+			// Stop checking after page is fully loaded and scrolled
+			setTimeout(() => {
+				clearInterval(checkInterval);
+			}, 10000);
+
+			// Observer for dynamically added content
+			const observer = new MutationObserver(() => {
+				setTimeout(() => {
+					setupTextReveal();
+					addHoverEffect();
+				}, 100);
+			});
+
+			observer.observe(document.body, {
+				childList: true,
+				subtree: true,
+			});
+
+			// Hide cursor when leaving window
+			document.addEventListener("mouseleave", () => {
+				gsap.to([cursorDot, cursorCircle], {
+					opacity: 0,
+					duration: 0.3,
+				});
+			});
+
+			document.addEventListener("mouseenter", () => {
+				gsap.to([cursorDot, cursorCircle], {
+					opacity: 1,
+					duration: 0.3,
+				});
+			});
+		}
+	}
+</script>

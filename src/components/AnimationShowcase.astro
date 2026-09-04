@@ -1,0 +1,580 @@
+---
+// Animation Showcase Component
+// Demonstrates all GSAP animation techniques used in the portfolio
+---
+
+<section class="animation-showcase">
+	<div class="container">
+		<div class="showcase-header">
+			<span class="showcase-label">Animation Library</span>
+			<h2 class="showcase-title">
+				<span class="title-word">GSAP</span>
+				<span class="title-word gradient-text">Effects</span>
+			</h2>
+			<p class="showcase-description">
+				A collection of all animation techniques implemented in this portfolio
+			</p>
+		</div>
+
+		<div class="effects-grid">
+			<!-- Fade In Effect -->
+			<div class="effect-card fade-in-demo">
+				<div class="effect-icon">✨</div>
+				<h3 class="effect-title">Fade In</h3>
+				<p class="effect-description">Smooth opacity transition</p>
+				<div class="demo-box demo-fade"></div>
+			</div>
+
+			<!-- Slide Up Effect -->
+			<div class="effect-card slide-up-demo">
+				<div class="effect-icon">⬆️</div>
+				<h3 class="effect-title">Slide Up</h3>
+				<p class="effect-description">Vertical slide animation</p>
+				<div class="demo-box demo-slide"></div>
+			</div>
+
+			<!-- Scale Effect -->
+			<div class="effect-card scale-demo">
+				<div class="effect-icon">🔍</div>
+				<h3 class="effect-title">Scale</h3>
+				<p class="effect-description">Zoom in/out effect</p>
+				<div class="demo-box demo-scale"></div>
+			</div>
+
+			<!-- Rotate Effect -->
+			<div class="effect-card rotate-demo">
+				<div class="effect-icon">🔄</div>
+				<h3 class="effect-title">Rotate</h3>
+				<p class="effect-description">3D rotation transform</p>
+				<div class="demo-box demo-rotate"></div>
+			</div>
+
+			<!-- Elastic Bounce -->
+			<div class="effect-card elastic-demo">
+				<div class="effect-icon">🎾</div>
+				<h3 class="effect-title">Elastic</h3>
+				<p class="effect-description">Bouncy spring effect</p>
+				<div class="demo-box demo-elastic"></div>
+			</div>
+
+			<!-- Stagger Effect -->
+			<div class="effect-card stagger-demo">
+				<div class="effect-icon">📊</div>
+				<h3 class="effect-title">Stagger</h3>
+				<p class="effect-description">Sequential animations</p>
+				<div class="stagger-container">
+					<div class="demo-box-small demo-stagger-item"></div>
+					<div class="demo-box-small demo-stagger-item"></div>
+					<div class="demo-box-small demo-stagger-item"></div>
+					<div class="demo-box-small demo-stagger-item"></div>
+				</div>
+			</div>
+
+			<!-- Magnetic Effect -->
+			<div class="effect-card magnetic-demo">
+				<div class="effect-icon">🧲</div>
+				<h3 class="effect-title">Magnetic</h3>
+				<p class="effect-description">Follow cursor interaction</p>
+				<div class="demo-box demo-magnetic"></div>
+			</div>
+
+			<!-- Parallax Effect -->
+			<div class="effect-card parallax-demo">
+				<div class="effect-icon">🌊</div>
+				<h3 class="effect-title">Parallax</h3>
+				<p class="effect-description">Scroll-based movement</p>
+				<div class="parallax-container">
+					<div class="demo-box-small demo-parallax-1"></div>
+					<div class="demo-box-small demo-parallax-2"></div>
+					<div class="demo-box-small demo-parallax-3"></div>
+				</div>
+			</div>
+
+			<!-- Morphing Effect -->
+			<div class="effect-card morph-demo">
+				<div class="effect-icon">🎭</div>
+				<h3 class="effect-title">Morph</h3>
+				<p class="effect-description">Shape transformation</p>
+				<div class="demo-box demo-morph"></div>
+			</div>
+
+			<!-- Text Split -->
+			<div class="effect-card text-demo">
+				<div class="effect-icon">📝</div>
+				<h3 class="effect-title">Text Reveal</h3>
+				<p class="effect-description">Character animation</p>
+				<div class="demo-text">
+					<span class="demo-char">G</span>
+					<span class="demo-char">S</span>
+					<span class="demo-char">A</span>
+					<span class="demo-char">P</span>
+				</div>
+			</div>
+
+			<!-- Counter Effect -->
+			<div class="effect-card counter-demo">
+				<div class="effect-icon">🔢</div>
+				<h3 class="effect-title">Counter</h3>
+				<p class="effect-description">Number animation</p>
+				<div class="demo-counter" data-target="100">0</div>
+			</div>
+
+			<!-- Path Drawing -->
+			<div class="effect-card path-demo">
+				<div class="effect-icon">✏️</div>
+				<h3 class="effect-title">Path Draw</h3>
+				<p class="effect-description">SVG line animation</p>
+				<svg class="demo-svg" viewBox="0 0 100 100" width="80" height="80">
+					<circle class="demo-circle" cx="50" cy="50" r="40" fill="none" stroke="url(#gradient)" stroke-width="4"/>
+					<defs>
+						<linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+   							 <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+    						<stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+						</linearGradient>
+					</defs>
+				</svg>
+			</div>
+		</div>
+
+		<div class="showcase-footer">
+			<p class="footer-text">Hover over cards to see effects in action</p>
+		</div>
+	</div>
+</section>
+
+<style>
+	.animation-showcase {
+		padding: 8rem 0;
+		background: var(--bg-primary);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.container {
+		max-width: 1400px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	/* Header */
+	.showcase-header {
+		text-align: center;
+		margin-bottom: 5rem;
+	}
+
+	.showcase-label {
+		display: inline-block;
+		padding: 0.5rem 1.5rem;
+		background: rgba(59, 130, 246, 0.1);
+		border: 1px solid rgba(59, 130, 246, 0.3);
+		border-radius: 50px;
+		color: #60a5fa;
+		font-size: 0.875rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		margin-bottom: 2rem;
+	}
+
+	.showcase-title {
+		font-size: clamp(3rem, 6vw, 5rem);
+		font-weight: 900;
+		line-height: 1.2;
+		margin-bottom: 1.5rem;
+		letter-spacing: -0.02em;
+	}
+
+	.title-word {
+		display: inline-block;
+		margin-right: 1rem;
+	}
+
+	.gradient-text {
+		background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #0ea5e9 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.showcase-description {
+		font-size: 1.25rem;
+		color: var(--text-secondary);
+		line-height: 1.8;
+	}
+
+	/* Grid */
+	.effects-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 2rem;
+		margin-bottom: 4rem;
+	}
+
+	.effect-card {
+		background: rgba(15, 15, 26, 0.5);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		border-radius: 20px;
+		padding: 2rem;
+		backdrop-filter: blur(10px);
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		cursor: pointer;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.effect-card::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+		opacity: 0;
+		transition: opacity 0.4s ease;
+	}
+
+	.effect-card:hover {
+		border-color: rgba(59, 130, 246, 0.5);
+		transform: translateY(-5px);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+	}
+
+	.effect-card:hover::before {
+		opacity: 1;
+	}
+
+	.effect-icon {
+		font-size: 2.5rem;
+		margin-bottom: 1rem;
+		display: block;
+	}
+
+	.effect-title {
+		font-size: 1.25rem;
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+		color: var(--text-primary);
+	}
+
+	.effect-description {
+		font-size: 0.875rem;
+		color: var(--text-secondary);
+		margin-bottom: 1.5rem;
+	}
+
+	/* Demo Boxes */
+	.demo-box {
+		width: 80px;
+		height: 80px;
+		background: linear-gradient(135deg, #6366f1, #8b5cf6);
+		border-radius: 12px;
+		margin: 0 auto;
+	}
+
+	.demo-box-small {
+		width: 40px;
+		height: 40px;
+		background: linear-gradient(135deg, #2563eb, #06b6d4);
+		border-radius: 8px;
+	}
+
+	/* Stagger Container */
+	.stagger-container {
+		display: flex;
+		gap: 0.5rem;
+		justify-content: center;
+	}
+
+	/* Parallax Container */
+	.parallax-container {
+		display: flex;
+		gap: 0.5rem;
+		justify-content: center;
+		height: 80px;
+		align-items: flex-end;
+	}
+
+	/* Text Demo */
+	.demo-text {
+		display: flex;
+		justify-content: center;
+		gap: 0.5rem;
+		font-size: 2rem;
+		font-weight: 900;
+	}
+
+	.demo-char {
+		display: inline-block;
+		background: linear-gradient(135deg, #3b82f6, #0ea5e9);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	/* Counter */
+	.demo-counter {
+		font-size: 3rem;
+		font-weight: 900;
+		text-align: center;
+		background: linear-gradient(135deg, #3b82f6, #0ea5e9);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	/* SVG */
+	.demo-svg {
+		display: block;
+		margin: 0 auto;
+	}
+
+	.demo-circle {
+		stroke-dasharray: 251.2;
+		stroke-dashoffset: 251.2;
+	}
+
+	/* Footer */
+	.showcase-footer {
+		text-align: center;
+		padding-top: 3rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+
+	.footer-text {
+		color: var(--text-secondary);
+		font-size: 0.875rem;
+		font-style: italic;
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.animation-showcase {
+			padding: 6rem 0;
+		}
+
+		.effects-grid {
+			grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+			gap: 1.5rem;
+		}
+
+		.effect-card {
+			padding: 1.5rem;
+		}
+	}
+</style>
+
+<script>
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	// Animate header
+	gsap.from('.showcase-label', {
+		scrollTrigger: {
+			trigger: '.showcase-header',
+			start: 'top 80%'
+		},
+		y: 30,
+		opacity: 0,
+		duration: 0.8,
+		ease: 'power3.out'
+	});
+
+	gsap.from('.title-word', {
+		scrollTrigger: {
+			trigger: '.showcase-header',
+			start: 'top 80%'
+		},
+		y: 50,
+		opacity: 0,
+		stagger: 0.2,
+		duration: 1,
+		ease: 'power4.out'
+	});
+
+	// Fade In Demo
+	const fadeCard = document.querySelector('.fade-in-demo');
+	fadeCard?.addEventListener('mouseenter', () => {
+		gsap.fromTo('.demo-fade',
+			{ opacity: 0 },
+			{ opacity: 1, duration: 0.8, ease: 'power2.out' }
+		);
+	});
+
+	// Slide Up Demo
+	const slideCard = document.querySelector('.slide-up-demo');
+	slideCard?.addEventListener('mouseenter', () => {
+		gsap.fromTo('.demo-slide',
+			{ y: 50, opacity: 0 },
+			{ y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }
+		);
+	});
+
+	// Scale Demo
+	const scaleCard = document.querySelector('.scale-demo');
+	scaleCard?.addEventListener('mouseenter', () => {
+		gsap.fromTo('.demo-scale',
+			{ scale: 0 },
+			{ scale: 1, duration: 0.6, ease: 'back.out(1.7)' }
+		);
+	});
+
+	// Rotate Demo
+	const rotateCard = document.querySelector('.rotate-demo');
+	rotateCard?.addEventListener('mouseenter', () => {
+		gsap.fromTo('.demo-rotate',
+			{ rotateY: 0 },
+			{ rotateY: 360, duration: 1, ease: 'power2.inOut' }
+		);
+	});
+
+	// Elastic Demo
+	const elasticCard = document.querySelector('.elastic-demo');
+	elasticCard?.addEventListener('mouseenter', () => {
+		gsap.fromTo('.demo-elastic',
+			{ scale: 0 },
+			{ scale: 1, duration: 1.5, ease: 'elastic.out(1, 0.5)' }
+		);
+	});
+
+	// Stagger Demo
+	const staggerCard = document.querySelector('.stagger-demo');
+	staggerCard?.addEventListener('mouseenter', () => {
+		gsap.fromTo('.demo-stagger-item',
+			{ y: 20, opacity: 0 },
+			{ y: 0, opacity: 1, stagger: 0.1, duration: 0.5, ease: 'power2.out' }
+		);
+	});
+
+	// Magnetic Demo
+	const magneticBox = document.querySelector('.demo-magnetic') as HTMLElement;
+	const magneticCard = document.querySelector('.magnetic-demo');
+
+	magneticCard?.addEventListener('mousemove', (e) => {
+		const rect = magneticCard.getBoundingClientRect();
+		const x = e.clientX - rect.left - rect.width / 2;
+		const y = e.clientY - rect.top - rect.height / 2;
+
+		gsap.to(magneticBox, {
+			x: x * 0.3,
+			y: y * 0.3,
+			duration: 0.3,
+			ease: 'power2.out'
+		});
+	});
+
+	magneticCard?.addEventListener('mouseleave', () => {
+		gsap.to(magneticBox, {
+			x: 0,
+			y: 0,
+			duration: 0.8,
+			ease: 'elastic.out(1, 0.5)'
+		});
+	});
+
+	// Parallax Demo
+	gsap.to('.demo-parallax-1', {
+		scrollTrigger: {
+			trigger: '.parallax-demo',
+			start: 'top bottom',
+			end: 'bottom top',
+			scrub: 1
+		},
+		y: -20
+	});
+
+	gsap.to('.demo-parallax-2', {
+		scrollTrigger: {
+			trigger: '.parallax-demo',
+			start: 'top bottom',
+			end: 'bottom top',
+			scrub: 1
+		},
+		y: -40
+	});
+
+	gsap.to('.demo-parallax-3', {
+		scrollTrigger: {
+			trigger: '.parallax-demo',
+			start: 'top bottom',
+			end: 'bottom top',
+			scrub: 1
+		},
+		y: -60
+	});
+
+	// Morph Demo
+	const morphCard = document.querySelector('.morph-demo');
+	morphCard?.addEventListener('mouseenter', () => {
+		gsap.to('.demo-morph', {
+			borderRadius: '50%',
+			duration: 0.6,
+			ease: 'power2.inOut'
+		});
+	});
+
+	morphCard?.addEventListener('mouseleave', () => {
+		gsap.to('.demo-morph', {
+			borderRadius: '12px',
+			duration: 0.6,
+			ease: 'power2.inOut'
+		});
+	});
+
+	// Text Demo
+	const textCard = document.querySelector('.text-demo');
+	textCard?.addEventListener('mouseenter', () => {
+		gsap.fromTo('.demo-char',
+			{ y: 20, opacity: 0, rotateX: -90 },
+			{
+				y: 0,
+				opacity: 1,
+				rotateX: 0,
+				stagger: 0.1,
+				duration: 0.6,
+				ease: 'back.out(1.7)'
+			}
+		);
+	});
+
+	// Counter Demo
+	const counterCard = document.querySelector('.counter-demo');
+	const counterElement = document.querySelector('.demo-counter') as HTMLElement;
+
+	counterCard?.addEventListener('mouseenter', () => {
+		const target = parseInt(counterElement?.dataset.target || '100');
+		const counter = { value: 0 };
+
+		gsap.to(counter, {
+			value: target,
+			duration: 2,
+			ease: 'power2.out',
+			onUpdate: () => {
+				if (counterElement) {
+					counterElement.textContent = Math.ceil(counter.value).toString();
+				}
+			}
+		});
+	});
+
+	// Path Drawing Demo
+	const pathCard = document.querySelector('.path-demo');
+	pathCard?.addEventListener('mouseenter', () => {
+		gsap.fromTo('.demo-circle',
+			{ strokeDashoffset: 251.2 },
+			{ strokeDashoffset: 0, duration: 2, ease: 'power2.inOut' }
+		);
+	});
+
+	// Animate cards on scroll
+	gsap.from('.effect-card', {
+		scrollTrigger: {
+			trigger: '.effects-grid',
+			start: 'top 80%'
+		},
+		y: 50,
+		opacity: 0,
+		stagger: 0.1,
+		duration: 0.8,
+		ease: 'power3.out'
+	});
+</script>
