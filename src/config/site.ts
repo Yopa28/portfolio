@@ -28,7 +28,7 @@ export const NAV_LINKS = [
 // Hero Section
 export const HERO = {
   subtitle: "Hello, I'm",
-  title: "Fullstack Engineer",
+  title: "Fullstack Engineer | AI Engineer",
   description: SITE.description,
   cta: {
     primary: { text: "View My Work", targetId: "projects" },
