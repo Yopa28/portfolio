@@ -2,8 +2,6 @@
 
 Portfolio website modern yang dibangun dengan Astro JS dan GSAP animations, menampilkan desain minimalis dan profesional dengan dark theme, skema warna **Electric Blue & Cyan**, serta animasi interaktif. Menggunakan sistem konfigurasi terpusat untuk kemudahan kustomisasi.
 
-![Portfolio Preview](https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop)
-
 ## 🚀 Fitur Utama
 
 ### 🎬 GSAP Animations
