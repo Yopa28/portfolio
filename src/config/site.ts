@@ -2,19 +2,19 @@
 export const SITE = {
   title: "Sandy Yopa Boangmanalu - Fullstack Engineer",
   description:
-    "Fullstack Engineer with experience shipping end-to-end production platforms, securing REST APIs with JWT/RBAC, and integrating real-time payment systems.",
-  author: "SANDY YOPA BOANGMANALU ",
+    "Fullstack & AI Engineer with experience shipping end-to-end production platforms, integrating AI models , securing REST APIs with JWT/RBAC, and building real-time payment systems.",
+  author: "SANDY YOPA BOANGMANALU",
   name: "Sandy Yopa Boangmanalu",
   role: "FULLSTACK ENGINEER | AI ENGINEER",
   email: "sandyboangmanalu@gmail.com",
-  url: "https://sandyopa.com",
+  url: "https://sandyyopa-iota.vercel.app",
 };
 
 // Social Media Links
 export const SOCIAL_LINKS = {
   github: "https://github.com/Yopa28",
   linkedin: "https://www.linkedin.com/in/sandyyopa/",
-  website: "https://sandyopa.com",
+  website: "https://sandyyopa-iota.vercel.app",
   email: "mailto:sandyboangmanalu@gmail.com",
 };
 
@@ -28,7 +28,10 @@ export const NAV_LINKS = [
 // Hero Section
 export const HERO = {
   subtitle: "Hello, I'm",
-  title: "Fullstack Engineer | AI Engineer",
+  title: [
+    "Fullstack Engineer |",
+    "AI Engineer"
+  ],
   description: SITE.description,
   cta: {
     primary: { text: "View My Work", targetId: "projects" },
@@ -62,7 +65,7 @@ export const PROJECTS = {
         "Shipped a full-stack cafe management platform featuring digital menus, live customer polling, feedback capture, and an admin analytics dashboard.",
       image: "/projects/sepijak.png",
       tags: ["Vue.js 3", "Express.js", "MySQL", "Tailwind CSS"],
-      link: "https://sandyopa.com",
+      link: "https://sandyyopa-iota.vercel.app",
       github: "https://github.com/Yopa28",
       overview: {
         purpose:
@@ -110,7 +113,7 @@ export const PROJECTS = {
         "Admin web dashboard for retail vendors to manage daily transactions, roles, and automated financial reconciliations.",
       image: "/projects/dashboard.png",
       tags: ["Laravel", "Blade", "Bootstrap", "MySQL", "Sanctum"],
-      link: "https://sandyopa.com",
+      link: "https://sandyyopa-iota.vercel.app",
       github: "https://github.com/Yopa28",
       overview: {
         purpose:
@@ -157,7 +160,7 @@ export const PROJECTS = {
         "Mobile POS application built with Flutter BLOC architecture featuring local caching and real-time Midtrans QRIS payment integration.",
       image: "/projects/CashWave.jpg",
       tags: ["Flutter", "Dart", "BLOC", "Midtrans API"],
-      link: "https://sandyopa.com",
+      link: "https://sandyyopa-iota.vercel.app",
       github: "https://github.com/Yopa28",
       overview: {
         purpose:
@@ -224,7 +227,7 @@ export const CONTACT = {
     {
       icon: "website",
       label: "Website",
-      value: "sandyopa.com",
+      value: "https://sandyyopa-iota.vercel.app",
       link: SOCIAL_LINKS.website,
     },
   ],

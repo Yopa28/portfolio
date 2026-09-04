@@ -2,7 +2,6 @@
 import { HERO } from "../config/site";
 
 const { subtitle, title, description, cta } = HERO;
-const titleWords = title.split(" ");
 ---
 
 <section class="hero-gsap">
@@ -22,11 +21,21 @@ const titleWords = title.split(" ");
 
             <h1 class="hero-title">
                 {
-                    titleWords.map((word) => (
+                    Array.isArray(title) ? (
+                        title.map((line) => (
+                            <span class="title-line">
+                                {line.split(" ").map((word) => (
+                                    <span class="word">{word}</span>
+                                ))}
+                            </span>
+                        ))
+                    ) : (
                         <span class="title-line">
-                            <span class="word">{word}</span>
+                            {String(title).split(" ").map((word) => (
+                                <span class="word">{word}</span>
+                            ))}
                         </span>
-                    ))
+                    )
                 }
             </h1>
 
@@ -81,7 +90,7 @@ const titleWords = title.split(" ");
     }
 
     .hero-label {
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
         overflow: hidden;
     }
 
@@ -101,21 +110,22 @@ const titleWords = title.split(" ");
     }
 
     .hero-title {
-        font-size: clamp(3rem, 8vw, 6.5rem);
+        font-size: clamp(2.5rem, 5.5vw, 5rem);
         font-weight: 300;
-        line-height: 1.1;
+        line-height: 1.2;
         margin-bottom: 2.5rem;
         letter-spacing: -0.02em;
     }
 
     .title-line {
-        display: block;
+        display: block; /* Memaksa 'AI Engineer' berada di baris baru */
         overflow: hidden;
         padding: 0.2rem 0;
     }
 
     .word {
         display: inline-block;
+        margin-right: 0.25em; /* Memberi spasi antar kata */
         will-change: transform;
         color: #ffffff;
     }
@@ -225,7 +235,6 @@ const titleWords = title.split(" ");
         transform: translateX(4px);
     }
 
-    /* Minimal decorative lines */
     .hero-line {
         position: absolute;
         width: 1px;
@@ -242,10 +251,9 @@ const titleWords = title.split(" ");
     .line-left { left: 10%; }
     .line-right { right: 10%; }
 
-    /* Responsive */
     @media (max-width: 768px) {
         .hero-title {
-            font-size: 3rem;
+            font-size: 2.2rem;
         }
 
         .hero-description {
@@ -269,7 +277,6 @@ const titleWords = title.split(" ");
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // Hero entrance animations
     const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
     gsap.set(".hero-cta .btn", { opacity: 0, y: 20 });
@@ -342,7 +349,6 @@ const titleWords = title.split(" ");
             "-=0.5",
         );
 
-    // Continuous float animations for label words
     if (labelWords.length > 0) {
         gsap.to(labelWords[0] as HTMLElement, {
             y: -8,
@@ -367,7 +373,6 @@ const titleWords = title.split(" ");
         });
     }
 
-    // Animate decorative lines
     gsap.from(".hero-line", {
         scaleY: 0,
         opacity: 0,
@@ -376,7 +381,6 @@ const titleWords = title.split(" ");
         delay: 0.5,
     });
 
-    // Magnetic buttons handler
     const buttons = document.querySelectorAll(".magnetic");
     const magneticRadius = 100;
 

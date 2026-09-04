@@ -35,12 +35,14 @@ import { CONTACT } from "../config/site";
                             <div class="contact-icon">
                                 {method.icon === "email" && (
                                     <svg
-                                        width="32"
-                                        height="32"
+                                        width="28"
+                                        height="28"
                                         viewBox="0 0 24 24"
                                         fill="none"
                                         stroke="currentColor"
                                         stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
                                     >
                                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                                         <polyline points="22,6 12,13 2,6" />
@@ -48,8 +50,8 @@ import { CONTACT } from "../config/site";
                                 )}
                                 {method.icon === "github" && (
                                     <svg
-                                        width="32"
-                                        height="32"
+                                        width="28"
+                                        height="28"
                                         viewBox="0 0 24 24"
                                         fill="currentColor"
                                     >
@@ -58,18 +60,34 @@ import { CONTACT } from "../config/site";
                                 )}
                                 {method.icon === "linkedin" && (
                                     <svg
-                                        width="32"
-                                        height="32"
+                                        width="28"
+                                        height="28"
                                         viewBox="0 0 24 24"
                                         fill="currentColor"
                                     >
                                         <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                                     </svg>
                                 )}
+                                {method.icon === "website" && (
+                                    <svg
+                                        width="28"
+                                        height="28"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                    </svg>
+                                )}
                                 {method.icon === "instagram" && (
                                     <svg
-                                        width="32"
-                                        height="32"
+                                        width="28"
+                                        height="28"
                                         viewBox="0 0 24 24"
                                         fill="currentColor"
                                     >
@@ -127,9 +145,9 @@ import { CONTACT } from "../config/site";
 
     .section-label {
         display: inline-block;
-        color: #71717a;
+        color: #38bdf8;
         font-size: 0.875rem;
-        font-weight: 400;
+        font-weight: 500;
         letter-spacing: 0.2em;
         text-transform: uppercase;
         margin-bottom: 2rem;
@@ -168,9 +186,10 @@ import { CONTACT } from "../config/site";
         display: flex;
         align-items: center;
         gap: 1.5rem;
-        padding: 2rem;
-        background: transparent;
+        padding: 1.75rem 2rem;
+        background: rgba(255, 255, 255, 0.02);
         border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
         text-decoration: none;
         color: inherit;
         transition: all 0.3s ease;
@@ -181,32 +200,35 @@ import { CONTACT } from "../config/site";
     }
 
     .contact-card:hover {
-        border-color: rgba(255, 255, 255, 0.2);
-        background: rgba(255, 255, 255, 0.02);
+        border-color: rgba(56, 189, 248, 0.4);
+        background: rgba(37, 99, 235, 0.05);
         transform: translateY(-4px);
     }
 
+    /* Kotak ikon dengan pendaran aksen Sky Blue */
     .contact-icon {
         flex-shrink: 0;
-        width: 64px;
-        height: 64px;
+        width: 54px;
+        height: 54px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: #ffffff;
+        background: rgba(56, 189, 248, 0.1);
+        border: 1px solid rgba(56, 189, 248, 0.25);
+        color: #38bdf8;
         transition: all 0.3s ease;
         position: relative;
         z-index: 1;
     }
 
     .contact-card:hover .contact-icon {
-        border-color: rgba(255, 255, 255, 0.3);
+        background: linear-gradient(135deg, #2563eb, #06b6d4);
+        color: #ffffff;
+        border-color: transparent;
         transform: scale(1.05);
     }
 
-    /* Disabled state for unavailable links */
     .contact-card.disabled {
         opacity: 0.4;
         cursor: not-allowed;
@@ -215,6 +237,8 @@ import { CONTACT } from "../config/site";
 
     .contact-card.disabled .contact-icon {
         border-color: rgba(255, 255, 255, 0.05);
+        background: transparent;
+        color: #71717a;
     }
 
     .contact-card.disabled .contact-value {
@@ -224,15 +248,16 @@ import { CONTACT } from "../config/site";
     .contact-info {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.25rem;
         position: relative;
         z-index: 1;
+        overflow: hidden;
     }
 
     .contact-label {
         font-size: 0.75rem;
         color: #71717a;
-        font-weight: 400;
+        font-weight: 500;
         text-transform: uppercase;
         letter-spacing: 0.1em;
     }
@@ -241,6 +266,14 @@ import { CONTACT } from "../config/site";
         font-size: 1rem;
         font-weight: 400;
         color: #ffffff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: color 0.3s ease;
+    }
+
+    .contact-card:hover .contact-value {
+        color: #38bdf8;
     }
 
     /* Responsive */
