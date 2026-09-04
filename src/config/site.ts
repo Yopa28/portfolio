@@ -5,7 +5,7 @@ export const SITE = {
     "Fullstack Engineer with experience shipping end-to-end production platforms, securing REST APIs with JWT/RBAC, and integrating real-time payment systems.",
   author: "SANDY YOPA BOANGMANALU ",
   name: "Sandy Yopa Boangmanalu",
-  role: "FULLSTACK ENGINEER",
+  role: "FULLSTACK ENGINEER | AI ENGINEER",
   email: "sandyboangmanalu@gmail.com",
   url: "https://sandyopa.com",
 };
