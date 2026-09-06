@@ -1,11 +1,11 @@
 // Site Configuration
 export const SITE = {
-  title: "Sandy Yopa Boangmanalu - Fullstack Engineer",
+  title: "Sandy Yopa Boangmanalu - Fullstack Developer",
   description:
     "Fullstack Developer with hands-on experience shipping end-to-end platforms - from database schema to deployed UI. Focused on Laravel, Express.js, Vue.js, and Flutter, with practical experience securing REST APIs (JWT/RBAC) and integrating real-time payment systems in offline-first mobile apps. Comfortable leveraging AI-assisted development tools to accelerate delivery and debugging.",
   author: "SANDY YOPA BOANGMANALU",
   name: "Sandy Yopa Boangmanalu",
-  role: "FULLSTACK ENGINEER | AI ENGINEER",
+  role: "FULLSTACK DEVELOPER",
   email: "sandyboangmanalu@gmail.com",
   url: "https://sandyyopa-iota.vercel.app",
 };
@@ -29,8 +29,7 @@ export const NAV_LINKS = [
 export const HERO = {
   subtitle: "Hello, I'm",
   title: [
-    "Fullstack Engineer |",
-    "AI Engineer"
+    "Fullstack Developer"
   ],
   description: SITE.description,
   cta: {
@@ -236,8 +235,8 @@ export const CONTACT = {
 // About Page
 export const ABOUT = {
   pageLabel: "About",
-  pageTitle: ["Fullstack Engineer | AI Engineer"],
-  intro: `Hi, I'm ${SITE.name}, a Fullstack & AI Engineer who has shipped 2 production platforms end-to-end from database schema design to deployed UI and AI integrations. Graduated with a Bachelor's degree in Informatics Engineering from Telkom University (GPA: 3.75/4.00), specializing in securing REST APIs, integrating AI models (Claude/LLM APIs), and engineering offline-first mobile applications.`,
+  pageTitle: ["Fullstack Developer"],
+  intro: `Hi, I'm ${SITE.name}, Fullstack Developer with hands-on experience shipping end-to-end platforms - from database schema to deployed UI. Focused on Laravel, Express.js, Vue.js, and Flutter, with practical experience securing REST APIs (JWT/RBAC) and integrating real-time payment systems in offline-first mobile apps. Comfortable leveraging AI-assisted development tools to accelerate delivery and debugging.`,
   paragraphs: [
     "Over my journey, I have designed and deployed full-stack systems using Laravel, Express.js, Vue.js, and Flutter. I focus heavily on security (JWT, RBAC, bcrypt), payment gateway integration (QRIS), and smooth user experience.",
     "From building cafe management systems to delivering Point of Sale solutions for local government initiatives (Dinas Komunikasi dan Informatika), I bridge complex backend logic with responsive frontend implementations.",
