@@ -21,14 +21,18 @@ Buka browser di `http://localhost:4321` 🎉
 ## 🎯 Available Pages
 
 ### 1. **Homepage** - `/`
+
 Portfolio utama dengan semua komponen GSAP terintegrasi:
+
 - Hero section dengan magnetic buttons
 - Animated stats counters
 - Project cards dengan scroll reveals
 - Contact section dengan magnetic cards
 
 ### 2. **GSAP Demo** - `/gsap-demo`
+
 Showcase lengkap semua animasi GSAP:
+
 - Hero animations
 - Stats counters
 - Animation showcase library
@@ -36,56 +40,66 @@ Showcase lengkap semua animasi GSAP:
 - Contact cards
 
 ### 3. **Vibrant Demo** - `/vibrant-demo`
+
 Design system klasik dengan starfield dan abstract shapes
 
 ### 4. **Experience Demo** - `/experience-demo`
+
 Experience cards dengan gradient borders
 
 ## 🎨 Key Components
 
 ### HeroGSAP
+
 ```astro
 <HeroGSAP
-  title="Creative Developer"
+  title="Fullstack Developer"
   subtitle="Hello, I'm"
   description="Your description here"
 />
 ```
 
 **Features:**
+
 - 3D text rotation entrance
 - Floating gradient orbs
 - Magnetic button effects
 - Parallax scroll effects
 
 ### StatsGSAP
+
 ```astro
 <StatsGSAP />
 ```
 
 **Features:**
+
 - Animated counters from 0
 - Scroll-triggered reveals
 - Hover glow effects
 - Parallax movements
 
 ### ProjectsGSAP
+
 ```astro
 <ProjectsGSAP />
 ```
 
 **Features:**
+
 - Staggered card animations
 - Image scale on hover
 - Overlay fade effects
 - Parallax scrolling
 
 ### AnimationShowcase
+
 ```astro
 <AnimationShowcase />
 ```
 
 **Features:**
+
 - 12 different animation effects
 - Interactive hover demos
 - All GSAP techniques demonstrated
@@ -93,56 +107,66 @@ Experience cards dengan gradient borders
 ## 🎬 Animation Highlights
 
 ### 1. Magnetic Effect
+
 Buttons dan cards mengikuti cursor dengan elastic bounce:
+
 ```javascript
-element.addEventListener('mousemove', (e) => {
+element.addEventListener("mousemove", (e) => {
   gsap.to(element, {
     x: x * 0.3,
     y: y * 0.3,
-    ease: 'power2.out'
+    ease: "power2.out",
   });
 });
 ```
 
 ### 2. Scroll Triggered
+
 Animasi muncul saat scroll ke viewport:
+
 ```javascript
-gsap.from('.element', {
+gsap.from(".element", {
   scrollTrigger: {
-    trigger: '.element',
-    start: 'top 80%'
+    trigger: ".element",
+    start: "top 80%",
   },
   y: 50,
-  opacity: 0
+  opacity: 0,
 });
 ```
 
 ### 3. Counter Animation
+
 Numbers count up dari 0:
+
 ```javascript
 gsap.to(counter, {
   value: target,
   duration: 2.5,
   onUpdate: () => {
     element.textContent = Math.ceil(counter.value);
-  }
+  },
 });
 ```
 
 ### 4. Stagger Animations
+
 Sequential reveals dengan delay:
+
 ```javascript
-gsap.from('.items', {
+gsap.from(".items", {
   y: 50,
   opacity: 0,
-  stagger: 0.1
+  stagger: 0.1,
 });
 ```
 
 ## 🎯 Customization
 
 ### Change Colors
+
 Edit di `src/pages/index.astro`:
+
 ```css
 :root {
   --bg-primary: #0a0a0f;
@@ -152,14 +176,18 @@ Edit di `src/pages/index.astro`:
 ```
 
 ### Modify Animations
+
 All animations in component `<script>` tags:
+
 - Duration: `duration: 1`
 - Easing: `ease: 'power4.out'`
 - Delay: `delay: 0.2`
 - Stagger: `stagger: 0.1`
 
 ### Add New Effects
+
 Check `AnimationShowcase.astro` for all available effects:
+
 - Fade In
 - Slide Up
 - Scale
@@ -196,6 +224,7 @@ npm run preview
 ## ⚡ Performance Tips
 
 1. **Use will-change** for animated elements:
+
 ```css
 .animated {
   will-change: transform, opacity;
@@ -203,6 +232,7 @@ npm run preview
 ```
 
 2. **Transform over position**:
+
 ```javascript
 // ✅ Good
 gsap.to(el, { x: 100, y: 100 });
@@ -212,6 +242,7 @@ gsap.to(el, { left: 100, top: 100 });
 ```
 
 3. **Kill unused animations**:
+
 ```javascript
 const tween = gsap.to(el, { x: 100 });
 tween.kill(); // when not needed
@@ -220,56 +251,63 @@ tween.kill(); // when not needed
 ## 🎨 Animation Presets
 
 ### Smooth Fade In
+
 ```javascript
 gsap.from(el, {
   y: 30,
   opacity: 0,
   duration: 0.8,
-  ease: 'power3.out'
+  ease: "power3.out",
 });
 ```
 
 ### Bouncy Entrance
+
 ```javascript
 gsap.from(el, {
   scale: 0,
   duration: 0.8,
-  ease: 'elastic.out(1, 0.5)'
+  ease: "elastic.out(1, 0.5)",
 });
 ```
 
 ### 3D Flip
+
 ```javascript
 gsap.from(el, {
   rotateY: 180,
   duration: 1,
-  ease: 'power2.inOut'
+  ease: "power2.inOut",
 });
 ```
 
 ### Smooth Slide
+
 ```javascript
 gsap.from(el, {
   x: -100,
   opacity: 0,
   duration: 1,
-  ease: 'power4.out'
+  ease: "power4.out",
 });
 ```
 
 ## 🐛 Troubleshooting
 
 ### Animations not working?
+
 1. Check GSAP is imported: `import { gsap } from 'gsap';`
 2. Register plugins: `gsap.registerPlugin(ScrollTrigger);`
 3. Check browser console for errors
 
 ### ScrollTrigger issues?
+
 1. Refresh after resize: `ScrollTrigger.refresh();`
 2. Add markers for debugging: `markers: true`
 3. Check start/end positions
 
 ### Performance issues?
+
 1. Reduce number of animated elements
 2. Use `will-change` CSS property
 3. Simplify complex animations
@@ -285,12 +323,14 @@ gsap.from(el, {
 ## 🚀 Deploy
 
 ### Vercel
+
 ```bash
 # Push to GitHub then import in Vercel
 vercel
 ```
 
 ### Netlify
+
 ```bash
 # Build command: npm run build
 # Publish directory: dist
@@ -298,6 +338,7 @@ netlify deploy
 ```
 
 ### GitHub Pages
+
 ```bash
 npm run build
 # Upload dist/ folder
@@ -314,6 +355,7 @@ npm run build
 ## 🎉 You're Ready!
 
 Sekarang Anda siap untuk:
+
 - ✅ Customize colors dan content
 - ✅ Add your projects
 - ✅ Modify animations
