@@ -2,7 +2,7 @@
 export const SITE = {
   title: "Sandy Yopa Boangmanalu - Fullstack Engineer",
   description:
-    "Fullstack & AI Engineer with experience shipping end-to-end production platforms, integrating AI models , securing REST APIs with JWT/RBAC, and building real-time payment systems.",
+    "Fullstack Developer with hands-on experience shipping end-to-end platforms - from database schema to deployed UI. Focused on Laravel, Express.js, Vue.js, and Flutter, with practical experience securing REST APIs (JWT/RBAC) and integrating real-time payment systems in offline-first mobile apps. Comfortable leveraging AI-assisted development tools to accelerate delivery and debugging.",
   author: "SANDY YOPA BOANGMANALU",
   name: "Sandy Yopa Boangmanalu",
   role: "FULLSTACK ENGINEER | AI ENGINEER",
@@ -62,7 +62,7 @@ export const PROJECTS = {
       tagline:
         "Full-stack cafe management system with live analytics and automated reporting.",
       description:
-        "Shipped a full-stack cafe management platform featuring digital menus, live customer polling, feedback capture, and an admin analytics dashboard.",
+        "Shipped a full-stack cafe management platform - digital menus, live customer polling, feedback capture, and an admin analytics dashboard - using Vue.js 3, Express.js, and MySQL.",
       image: "/projects/sepijak.png",
       tags: ["Vue.js 3", "Express.js", "MySQL", "Tailwind CSS"],
       link: "https://sandyyopa-iota.vercel.app",
@@ -157,9 +157,9 @@ export const PROJECTS = {
       category: "Mobile Application",
       tagline: "Offline-first POS companion app with QRIS payment integration.",
       description:
-        "Mobile POS application built with Flutter BLOC architecture featuring local caching and real-time Midtrans QRIS payment integration.",
+        "Mobile POS application built with Flutter BLOC architecture featuring local caching and real-time QRIS payment integration.",
       image: "/projects/CashWave.jpg",
-      tags: ["Flutter", "Dart", "BLOC", "Midtrans API"],
+      tags: ["Flutter", "Dart", "BLOC", ],
       link: "https://sandyyopa-iota.vercel.app",
       github: "https://github.com/Yopa28",
       overview: {
@@ -171,10 +171,10 @@ export const PROJECTS = {
       problemStatement:
         "Transaction drops and poor internet connectivity at vendor locations frequently interrupted order processing and payments.",
       solution:
-        "Engineered an offline-first mobile client using Flutter BLOC (13+ states) with local caching and integrated Midtrans API for automated QRIS payments.",
+        "Engineered an offline-first mobile client using Flutter BLOC (13+ states) with local caching and integrated automated QRIS payments.",
       architecture: {
         frontend: "Flutter, Dart (BLOC State Management)",
-        backend: "Laravel REST APIs, Midtrans Payment Gateway",
+        backend: "Laravel REST APIs, QRIS Payment Gateway",
         database: "Local Caching (SQLite/Hive)",
         deployment: "Android / Production Mobile",
         reasons:
@@ -182,7 +182,7 @@ export const PROJECTS = {
       },
       features: [
         "Offline-first architecture enabling reliable order sync when offline",
-        "Integrated Midtrans API for seamless QRIS digital payments",
+        "Integrated QRIS Payment Gateway for seamless digital payments",
         "Predictable state management handling 13+ distinct app states",
         "Real-time daily revenue tracking for cashiers",
       ],
@@ -239,7 +239,7 @@ export const ABOUT = {
   pageTitle: ["Fullstack Engineer | AI Engineer"],
   intro: `Hi, I'm ${SITE.name}, a Fullstack & AI Engineer who has shipped 2 production platforms end-to-end from database schema design to deployed UI and AI integrations. Graduated with a Bachelor's degree in Informatics Engineering from Telkom University (GPA: 3.75/4.00), specializing in securing REST APIs, integrating AI models (Claude/LLM APIs), and engineering offline-first mobile applications.`,
   paragraphs: [
-    "Over my journey, I have designed and deployed full-stack systems using Laravel, Express.js, Vue.js, and Flutter. I focus heavily on security (JWT, RBAC, bcrypt), payment gateway integration (Midtrans), and smooth user experience.",
+    "Over my journey, I have designed and deployed full-stack systems using Laravel, Express.js, Vue.js, and Flutter. I focus heavily on security (JWT, RBAC, bcrypt), payment gateway integration (QRIS), and smooth user experience.",
     "From building cafe management systems to delivering Point of Sale solutions for local government initiatives (Dinas Komunikasi dan Informatika), I bridge complex backend logic with responsive frontend implementations.",
     "I hold a Junior Cyber Security certification from BNSP and actively apply secure coding principles, regression testing, and AI-assisted development techniques to my workflow.",
   ],
@@ -278,7 +278,7 @@ export const ABOUT = {
         items: [
           "Git / GitHub / Postman",
           "Docker",
-          "Midtrans API Integration",
+          "QRIS Payment Gateway Integration",
           "Figma UI/UX Design",
           "Regression & Manual Testing",
         ],
@@ -303,24 +303,24 @@ export const ABOUT = {
         title: "Fullstack Developer (Freelance)",
         company: "Kedai Sepijak, Purwokerto",
         description: [
-          "Shipped a full-stack cafe management platform — digital menus, live customer polling, feedback capture, and an admin analytics dashboard — using Vue.js 3, Express.js, and MySQL.",
+          "Shipped a full-stack cafe management platform - digital menus, live customer polling, feedback capture, and an admin analytics dashboard - using Vue.js 3, Express.js, and MySQL.",
           "Built 38 REST API endpoints across 6 modules; introduced JWT auth + bcrypt hashing, closing a previously nonexistent access-control gap.",
           "Built responsive interfaces with Vue.js 3 Composition API and Tailwind CSS, integrating Chart.js for real-time sales analytics.",
-          "Automated report generation with jsPDF (one-click PDF export), replacing manual spreadsheet reporting.",
-          "Drove full-lifecycle execution — covering regression testing, API integration, documentation, and deployment — in a cross-functional team to enable the client's successful launch."
-        ], // <--- .join(" ") sudah dihapus
+          "Automated weekly report generation with jsPDF (one-click PDF export), cutting report preparation time from 30 minutes to under 5 minutes.",
+          "Drove full-lifecycle execution  covering regression testing, API integration, documentation, and deployment in a cross-functional team to enable the client's successful launch"
+        ], 
       },
       {
         date: "Jul 2025 - Aug 2025",
         title: "Fullstack Developer (Intern)",
         company: "Dinas Komunikasi dan Informatika, Dairi",
         description: [
-          "Built a Point of Sale system — Laravel admin dashboard plus Flutter mobile app — for retail vendors managing daily transactions.",
-          "Developed and secured 16 REST API endpoints with Laravel Sanctum and RBAC, enforcing least-privilege access across admin, cashier, and vendor roles on a schema I designed.",
-          "Built offline-first mobile client (Flutter BLoC, 13+ states) with local caching, so vendor orders sync reliably after connectivity drops.",
-          "Integrated Midtrans API for QRIS payments and built cashier-facing dashboards for daily revenue tracking and automated end-of-day closing, removing a manual reconciliation step.",
+          "Built a Point of Sale system - Laravel admin dashboard plus Flutter mobile app - for retail vendors managing daily transactions.",
+          "Developed and secured 16 REST API endpoints with Laravel Sanctum and RBAC, enforcing least-privilege access across admin, cashier, and vendor roles on a schema",
+          "Built an offline-first mobile client (Flutter BLoC, 13+ states) with local caching, so vendor orders sync reliably after connectivity drops.",
+          "Integrated a payment gateway API for QRIS payments and built cashier-facing dashboards for daily revenue tracking and automated end-of-day closing, removing a manual reconciliation step.",
           "Designed the UI/UX for the Dairi Regency Environmental Service application, simplifying report submission so citizens could file complaints with fewer steps."
-        ], // <--- .join(" ") sudah dihapus
+        ], 
       },
       {
         date: "Jan 2025 - Dec 2025",
@@ -329,7 +329,7 @@ export const ABOUT = {
         description: [
           "Coordinated division activities, including training schedules, tournament participation, and event preparation for members.",
           "Managed team communication, member registration, and operational planning while collaborating with other organizational divisions."
-        ], // <--- .join(" ") sudah dihapus
+        ], 
       },
     ],
   },
