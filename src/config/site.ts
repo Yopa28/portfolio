@@ -64,7 +64,7 @@ export const PROJECTS = {
         "Shipped a full-stack cafe management platform - digital menus, live customer polling, feedback capture, and an admin analytics dashboard - using Vue.js 3, Express.js, and MySQL.",
       image: "/projects/sepijak.png",
       tags: ["Vue.js 3", "Express.js", "MySQL", "Tailwind CSS"],
-      link: "https://sandyyopa-iota.vercel.app",
+      link: "https://sepijak.vercel.app",
       github: "https://github.com/Yopa28",
       overview: {
         purpose:
