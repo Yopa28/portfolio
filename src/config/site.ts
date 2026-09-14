@@ -159,7 +159,7 @@ export const PROJECTS = {
         "Mobile POS application built with Flutter BLOC architecture featuring local caching and real-time QRIS payment integration.",
       image: "/projects/CashWave.jpg",
       tags: ["Flutter", "Dart", "BLOC", ],
-      link: "https://sandyyopa-iota.vercel.app",
+      link: "https://www.figma.com/design/sleoiegysXzrtVZeu0J0mV/CashWave?node-id=0-1&t=Yd5UGnndhdT3XSvn-1",
       github: "https://github.com/Yopa28",
       overview: {
         purpose:
