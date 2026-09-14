@@ -61,7 +61,8 @@ const { project } = Astro.props;
           </div>
         </div>
 
-        <div class="hero-image">
+        {/* Dynamic Class ditambahkan di sini khusus untuk mobile */}
+        <div class={`hero-image ${project.slug === 'cashwave-mobile' ? 'is-mobile' : ''}`}>
           <img src={project.image} alt={`${project.title} Preview`} />
         </div>
       </div>
@@ -385,6 +386,18 @@ const { project } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  /* Custom Styling Khusus Cashwave Mobile */
+  .hero-image.is-mobile {
+    max-width: 380px;
+    margin: 0 auto;
+    aspect-ratio: 9/16;
+  }
+
+  .hero-image.is-mobile img {
+    object-fit: contain;
+    background-color: #0f172a;
   }
 
   /* Overview Grid */
