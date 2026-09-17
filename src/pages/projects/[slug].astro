@@ -61,10 +61,45 @@ const { project } = Astro.props;
           </div>
         </div>
 
-        {/* Dynamic Class ditambahkan di sini khusus untuk mobile */}
-        <div class={`hero-image ${project.slug === 'cashwave-mobile' ? 'is-mobile' : ''}`}>
-          <img src={project.image} alt={`${project.title} Preview`} />
-        </div>
+        {project.gallery && project.gallery.length > 0 && (
+          <div class={`gallery-showcase ${project.slug === 'cashwave-mobile' ? 'is-mobile' : ''}`} data-gallery-images={JSON.stringify(project.gallery)}>
+            <div class="gallery-device-shell">
+              <button type="button" class="gallery-nav gallery-prev" aria-label="Previous preview">‹</button>
+              <div class="gallery-feature">
+                <button
+                  type="button"
+                  class="gallery-feature-button"
+                  data-open-gallery="0"
+                  aria-label={`Open ${project.title} preview 1`}
+                >
+                  <img src={project.gallery[0]} alt={`${project.title} preview 1`} />
+                </button>
+              </div>
+              <button type="button" class="gallery-nav gallery-next" aria-label="Next preview">›</button>
+            </div>
+
+            <div class="gallery-thumbs" role="tablist" aria-label={`${project.title} gallery`}>
+              {project.gallery.map((image, index) => (
+                <button
+                  type="button"
+                  class={`gallery-thumb ${index === 0 ? 'is-active' : ''}`}
+                  data-gallery-index={index}
+                  data-gallery-image={image}
+                  aria-label={`View ${project.title} preview ${index + 1}`}
+                  aria-pressed={index === 0}
+                >
+                  <img src={image} alt={`${project.title} preview ${index + 1}`} />
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {(!project.gallery || project.gallery.length === 0) && (
+          <div class={`hero-image ${project.slug === 'cashwave-mobile' ? 'is-mobile' : ''}`}>
+            <img src={project.image} alt={`${project.title} Preview`} />
+          </div>
+        )}
       </div>
     </section>
 
@@ -188,6 +223,128 @@ const { project } = Astro.props;
       </div>
     </section>
   </main>
+
+  <div class="lightbox-backdrop" id="lightbox-backdrop" aria-hidden="true">
+    <div class="lightbox-content" role="dialog" aria-modal="true" aria-label="Project image preview">
+      <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close image preview">
+        ×
+      </button>
+
+      <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous image">
+        ‹
+      </button>
+
+      <img class="lightbox-image" id="lightbox-image" src="" alt="Project preview" />
+
+      <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next image">
+        ›
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const galleryFeatureImage = document.querySelector('.gallery-feature-button img');
+    const galleryThumbs = document.querySelectorAll('.gallery-thumb');
+    const galleryPrev = document.querySelector('.gallery-prev');
+    const galleryNext = document.querySelector('.gallery-next');
+    const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const galleryImages = Array.from(document.querySelectorAll('.gallery-thumb')).map((thumb) => thumb.getAttribute('data-gallery-image'));
+
+    let currentIndex = 0;
+
+    const updateFeaturedImage = (index) => {
+      const safeIndex = (index + galleryImages.length) % galleryImages.length;
+      currentIndex = safeIndex;
+
+      const selectedImage = galleryImages[safeIndex];
+
+      if (galleryFeatureImage && selectedImage) {
+        galleryFeatureImage.src = selectedImage;
+        galleryFeatureImage.alt = `Project preview ${safeIndex + 1}`;
+      }
+
+      galleryThumbs.forEach((thumb, thumbIndex) => {
+        const isActive = thumbIndex === safeIndex;
+        thumb.classList.toggle('is-active', isActive);
+        thumb.setAttribute('aria-pressed', String(isActive));
+      });
+
+      const featureButton = document.querySelector('.gallery-feature-button');
+      if (featureButton) {
+        featureButton.setAttribute('data-open-gallery', String(safeIndex));
+        featureButton.setAttribute('aria-label', `Open project preview ${safeIndex + 1}`);
+      }
+
+      if (lightboxImage) {
+        lightboxImage.src = selectedImage || '';
+      }
+    };
+
+    const moveGallery = (direction) => {
+      if (!galleryImages.length) return;
+      updateFeaturedImage(currentIndex + direction);
+    };
+
+    galleryThumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        const index = Number(thumb.getAttribute('data-gallery-index'));
+        updateFeaturedImage(index);
+      });
+    });
+
+    galleryPrev?.addEventListener('click', () => moveGallery(-1));
+    galleryNext?.addEventListener('click', () => moveGallery(1));
+
+    document.querySelectorAll('.gallery-feature-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        const index = Number(button.getAttribute('data-open-gallery') ?? 0);
+        if (!galleryImages[index]) return;
+        currentIndex = index;
+        if (lightboxBackdrop && lightboxImage) {
+          lightboxImage.src = galleryImages[index];
+          lightboxBackdrop.classList.add('is-visible');
+          lightboxBackdrop.setAttribute('aria-hidden', 'false');
+        }
+      });
+    });
+
+    const closeLightbox = () => {
+      if (!lightboxBackdrop || !lightboxImage) return;
+      lightboxBackdrop.classList.remove('is-visible');
+      lightboxBackdrop.setAttribute('aria-hidden', 'true');
+      lightboxImage.src = '';
+    };
+
+    const navigateLightbox = (direction) => {
+      if (!galleryImages.length) return;
+      const nextIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
+      currentIndex = nextIndex;
+      updateFeaturedImage(nextIndex);
+      if (lightboxImage) {
+        lightboxImage.src = galleryImages[nextIndex] || '';
+      }
+    };
+
+    lightboxClose?.addEventListener('click', closeLightbox);
+    lightboxPrev?.addEventListener('click', () => navigateLightbox(-1));
+    lightboxNext?.addEventListener('click', () => navigateLightbox(1));
+
+    lightboxBackdrop?.addEventListener('click', (event) => {
+      if (event.target === lightboxBackdrop) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (lightboxBackdrop?.classList.contains('is-visible')) {
+        if (event.key === 'Escape') closeLightbox();
+        if (event.key === 'ArrowLeft') navigateLightbox(-1);
+        if (event.key === 'ArrowRight') navigateLightbox(1);
+      }
+    });
+  </script>
 </Layout>
 
 <style>
@@ -386,6 +543,265 @@ const { project } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .gallery-showcase {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .gallery-showcase.is-mobile {
+    width: min(100%, 760px);
+    margin: 2rem auto 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    justify-items: center;
+    gap: 1.1rem;
+    padding: 1rem 1rem 1rem 1.25rem;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 30px;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.24));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  .gallery-device-shell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .gallery-feature {
+    position: relative;
+    width: min(28vw, 240px);
+    aspect-ratio: 9 / 16;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 8px solid rgba(9, 15, 26, 0.96);
+    box-shadow:
+      inset 0 0 0 2px rgba(148, 163, 184, 0.25),
+      0 22px 40px rgba(15, 23, 42, 0.7),
+      0 0 0 1px rgba(56, 189, 248, 0.15);
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(2, 6, 23, 0.94));
+    padding: 0.45rem;
+  }
+
+  .gallery-feature-button {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .gallery-feature-button img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.95));
+    transition: transform 0.35s ease, filter 0.35s ease;
+  }
+
+  .gallery-feature-button:hover img {
+    transform: scale(1.02);
+    filter: brightness(1.06) saturate(1.12);
+  }
+
+  .gallery-nav {
+    width: 2.2rem;
+    height: 2.2rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.72);
+    color: #fff;
+    font-size: 1.7rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .gallery-thumbs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    width: 92px;
+    max-height: 460px;
+    overflow-y: auto;
+    padding: 0.2rem 0.1rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .gallery-thumbs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-thumb {
+    position: relative;
+    flex: 0 0 82px;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background: rgba(15, 23, 42, 0.65);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 0;
+    cursor: pointer;
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.22);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .gallery-thumb:hover,
+  .gallery-thumb.is-active {
+    transform: translateX(-2px);
+    border-color: rgba(56, 189, 248, 0.8);
+    box-shadow: 0 12px 18px rgba(6, 182, 212, 0.18);
+  }
+
+  .gallery-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.95));
+  }
+
+  .gallery-showcase:not(.is-mobile) {
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .gallery-showcase:not(.is-mobile) .gallery-device-shell {
+    gap: 0.8rem;
+  }
+
+  .gallery-showcase:not(.is-mobile) .gallery-feature {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 20px;
+    border-width: 1px;
+    padding: 0.35rem;
+  }
+
+  .gallery-showcase:not(.is-mobile) .gallery-feature-button img {
+    border-radius: 14px;
+  }
+
+  .gallery-showcase:not(.is-mobile) .gallery-thumbs {
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.2rem 0.1rem 0.35rem;
+  }
+
+  .gallery-showcase:not(.is-mobile) .gallery-thumb {
+    flex: 0 0 150px;
+    width: 150px;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+  }
+
+  .gallery-showcase:not(.is-mobile) .gallery-thumb:hover,
+  .gallery-showcase:not(.is-mobile) .gallery-thumb.is-active {
+    transform: translateY(-2px);
+  }
+
+  .lightbox-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.82);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 1000;
+  }
+
+  .lightbox-backdrop.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .lightbox-content {
+    position: relative;
+    max-width: min(1200px, 90vw);
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+  }
+
+  .lightbox-image {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 12px;
+    object-fit: contain;
+  }
+
+  .lightbox-close,
+  .lightbox-nav {
+    position: absolute;
+    z-index: 2;
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.95);
+    color: #fff;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .lightbox-close:hover,
+  .lightbox-nav:hover {
+    transform: scale(1.05);
+    background: rgba(17, 24, 39, 1);
+  }
+
+  .lightbox-close {
+    top: -0.9rem;
+    right: -0.9rem;
+  }
+
+  .lightbox-prev {
+    left: -1.2rem;
+  }
+
+  .lightbox-next {
+    right: -1.2rem;
   }
 
   /* Custom Styling Khusus Cashwave Mobile */
@@ -612,9 +1028,50 @@ const { project } = Astro.props;
       grid-template-columns: 1fr;
       gap: 2rem;
     }
+
+    .gallery-showcase.is-mobile {
+      max-width: 520px;
+      gap: 0.9rem;
+      padding: 0.9rem 0.9rem 0.9rem 1rem;
+    }
+
+    .gallery-feature {
+      width: 170px;
+    }
+
+    .gallery-thumb {
+      width: 68px;
+      flex-basis: 68px;
+    }
     
     .impact-card {
       padding: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-showcase.is-mobile {
+      max-width: 100%;
+      gap: 0.75rem;
+    }
+
+    .gallery-feature {
+      width: 170px;
+    }
+
+    .gallery-thumb {
+      width: 68px;
+      flex-basis: 68px;
+    }
+
+    .gallery-nav {
+      width: 2.1rem;
+      height: 2.1rem;
+      font-size: 1.5rem;
+    }
+
+    .lightbox-backdrop {
+      padding: 1rem;
     }
   }
 </style>

@@ -40,8 +40,6 @@ export const HERO = {
 
 // Stats
 export const STATS = [
-  { number: "2+", label: "Production Platforms" },
-  { number: "50+", label: "Secured REST APIs" },
   { number: "3.75", label: "GPA / Telkom University" },
   { number: "100", suffix: "%", label: "Commitment & Precision" },
 ];
@@ -110,7 +108,14 @@ export const PROJECTS = {
         "Point of Sale system admin dashboard with RBAC and relational reporting.",
       description:
         "Admin web dashboard for retail vendors to manage daily transactions, roles, and automated financial reconciliations.",
-      image: "/projects/dashboard.png",
+      image: "/projects/cashwave-admin.png",
+      gallery: [
+        "/projects/cashwave-admin.png",
+        "/projects/cashwave-product.png",
+        "/projects/cashwave-order.png",
+        "/projects/cashwave-categories.png",
+        "/projects/cashwave-users.png",
+      ],
       tags: ["Laravel", "Blade", "Bootstrap", "MySQL", "Sanctum"],
       link: "https://sandyyopa-iota.vercel.app",
       github: "https://github.com/Yopa28",
@@ -157,14 +162,25 @@ export const PROJECTS = {
       tagline: "Offline-first POS companion app with QRIS payment integration.",
       description:
         "Mobile POS application built with Flutter BLOC architecture featuring local caching and real-time QRIS payment integration.",
-      image: "/projects/CashWave.jpg",
-      tags: ["Flutter", "Dart", "BLOC", ],
+      image: "/projects/cashwave-home.png",
+      gallery: [
+        "/projects/cashwave-home.png",
+        "/projects/cashwave-menu.png",
+        "/projects/cashwave-orders.png",
+        "/projects/cashwave-payment.png",
+        "/projects/cashwave-nota.png",
+        "/projects/cashwave-history.png",
+        "/projects/cashwave-detail.png",
+        "/projects/cashwave-sync.png",
+        "/projects/cashwave-report.png",
+      ],
+      tags: ["Flutter", "Dart", "BLOC"],
       link: "https://www.figma.com/design/sleoiegysXzrtVZeu0J0mV/CashWave?node-id=0-1&t=Yd5UGnndhdT3XSvn-1",
       github: "https://github.com/Yopa28",
       overview: {
         purpose:
           "To empower cashiers and vendors with a mobile POS system capable of operating seamlessly during network interruptions.",
-        role: "Mobile Developer (Intern - Diskominfo Dairi)",
+        role: "Fullstack Developer (Intern - Diskominfo Dairi)",
         status: "Production",
       },
       problemStatement:
